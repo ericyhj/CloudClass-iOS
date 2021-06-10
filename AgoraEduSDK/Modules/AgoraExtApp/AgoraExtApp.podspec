@@ -15,6 +15,4 @@ Pod::Spec.new do |spec|
   spec.module_name   = 'AgoraExtApp'
   spec.swift_versions = ['5.0', '5.1', '5.2', '5.3']
   spec.dependency "AgoraUIBaseViews"
-  
-  spec.static_framework = true
 end

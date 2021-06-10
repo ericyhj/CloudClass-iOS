@@ -61,6 +61,4 @@ TODO: Add long description of the pod here.
   s.dependency "AgoraUIBaseViews"
   s.dependency "AgoraExtApp"
   s.dependency "AgoraEduContext"
-  
-  s.static_framework = true
 end

@@ -17,7 +17,4 @@ Pod::Spec.new do |spec|
   spec.dependency "AFNetworking"
   spec.dependency "CocoaLumberjack", "3.6.1"
   spec.dependency "AliyunOSSiOS", "2.10.8"
-
-  spec.static_framework = true
-  
 end

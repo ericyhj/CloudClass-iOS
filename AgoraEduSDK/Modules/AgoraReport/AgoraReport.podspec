@@ -15,6 +15,4 @@ Pod::Spec.new do |spec|
   spec.swift_versions = ['5.0', '5.1', '5.2', '5.3']
 
   # spec.pod_target_xcconfig = {"OTHER_SWIFT_FLAGS[config=Debug]" => "-D AGORADEBUG" }
-  
-  spec.static_framework = true
 end
