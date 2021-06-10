@@ -20,9 +20,6 @@ def sourcePod
   pod 'AgoraEduContext', :path => 'AgoraEduSDK/Modules/AgoraEduContext/AgoraEduContext.podspec'
 
   # if you use swift project, you just only change 'OC' to 'Swift'
-  pod 'AgoraHandsUp', :path => 'AgoraEduSDK/Modules/AgoraHandsUp/AgoraHandsUp.podspec', :subspecs => ['OC']
-
-  # if you use swift project, you just only change 'OC' to 'Swift'
   pod 'AgoraActionProcess', :path => 'AgoraEduSDK/Modules/AgoraActionProcess/AgoraActionProcess.podspec', :subspecs => ['OC']
 end
 
@@ -34,10 +31,12 @@ workspace 'AgoraEducation.xcworkspace'
 install! 'cocoapods', :deterministic_uuids => false, :warn_for_unused_master_specs_repo => false
 
 target 'AgoraEducation' do
-  use_frameworks!
+  use_frameworks! :linkage => :static
+#  use_modular_headers!
   
-  pod "AFNetworking", "3.1.0"
+  pod "AFNetworking", '3.1.0'
   pod 'OpenSSL-Universal', '1.0.2.17'
+  pod "AliyunOSSiOS", "2.10.8", :modular_headers => true
 
   sourcePod
   #binaryPod

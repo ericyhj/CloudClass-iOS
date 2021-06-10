@@ -248,7 +248,9 @@ private extension AgoraReportor {
         #endif
         
         for key in headers.keys {
-            httpSession.requestSerializer.setValue(headers[key], forKey: key)
+            if let value = headers[key] as? String {
+                httpSession.requestSerializer.setValue(value, forHTTPHeaderField: key)
+            }
         }
         httpSession.post(url,
                          parameters: parameters,

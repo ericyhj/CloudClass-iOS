@@ -14,8 +14,10 @@ Pod::Spec.new do |spec|
   spec.source_files  = "AgoraLog/**/*.{h,m,c}"
   spec.public_header_files = "AgoraLog/**/*.h"
   
-  spec.dependency "AFNetworking", "3.1.0"
+  spec.dependency "AFNetworking"
   spec.dependency "CocoaLumberjack", "3.6.1"
   spec.dependency "AliyunOSSiOS", "2.10.8"
 
+  spec.static_framework = true
+  
 end

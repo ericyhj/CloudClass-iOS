@@ -10,9 +10,11 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "ssh://git@git.agoralab.co/aduc/cloudclass-ios.git", :tag => "#{spec.version}" }
 
   spec.source_files  = "AgoraReport/**/*.{swift,h,m}"
-  spec.dependency "AFNetworking", "3.1.0"
+  spec.dependency "AFNetworking"
   spec.module_name   = 'AgoraReport'
   spec.swift_versions = ['5.0', '5.1', '5.2', '5.3']
 
   # spec.pod_target_xcconfig = {"OTHER_SWIFT_FLAGS[config=Debug]" => "-D AGORADEBUG" }
+  
+  spec.static_framework = true
 end

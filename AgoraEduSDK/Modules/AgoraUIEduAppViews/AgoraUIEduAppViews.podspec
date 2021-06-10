@@ -44,4 +44,6 @@ Pod::Spec.new do |spec|
 
   spec.swift_versions = ['5.0', '5.1', '5.2', '5.3', '5.4']
   spec.default_subspec = 'BINARY'
+  
+  spec.static_framework = true
 end

@@ -14,4 +14,6 @@ Pod::Spec.new do |spec|
   spec.public_header_files = "AgoraWhiteBoard/*.h"
   
   spec.dependency "Whiteboard", "2.12.22"
+  
+  spec.static_framework = true
 end
