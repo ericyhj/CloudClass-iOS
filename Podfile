@@ -36,7 +36,7 @@ install! 'cocoapods', :deterministic_uuids => false, :warn_for_unused_master_spe
 target 'AgoraEducation' do
   use_frameworks!
   
-  pod "AFNetworking", "4.0.1"
+  pod "AFNetworking", "3.1.0"
   pod 'OpenSSL-Universal', '1.0.2.17'
 
   sourcePod

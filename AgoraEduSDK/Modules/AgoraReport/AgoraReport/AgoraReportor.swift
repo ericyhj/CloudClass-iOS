@@ -246,10 +246,12 @@ private extension AgoraReportor {
         print("\(AgoraReportor.Tag) headers:\(headers)")
         print("\(AgoraReportor.Tag) parameters:\(try! parameters.agora_json())")
         #endif
-    
+        
+        for key in headers.keys {
+            httpSession.requestSerializer.setValue(headers[key], forKey: key)
+        }
         httpSession.post(url,
                          parameters: parameters,
-                         headers: headers,
                          progress: nil) { (task, responseObject) in
             
             #if AGORADEBUG

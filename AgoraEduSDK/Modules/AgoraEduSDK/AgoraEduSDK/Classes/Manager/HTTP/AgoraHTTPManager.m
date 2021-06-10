@@ -324,10 +324,16 @@ static NSString *AGORA_EDU_SDK_BASE_URL = @"https://api.agora.io";
     AFHTTPSessionManager *sessionManager = [AgoraHTTPManager shareInstance].sessionManager;
     sessionManager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", @"DELETE", nil];
     
+    if(headers != nil && headers.allKeys.count > 0){
+        NSArray<NSString*> *keys = headers.allKeys;
+        for(NSString *key in keys){
+            [sessionManager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
+        }
+    }
+    
     if (type == HttpTypePut) {
         [sessionManager PUT:encodeUrl
                  parameters:parameters
-                    headers:headers
                     success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             sucBlock(responseObject);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -342,7 +348,6 @@ static NSString *AGORA_EDU_SDK_BASE_URL = @"https://api.agora.io";
     } else if (type == HttpTypePost) {
         [sessionManager POST:encodeUrl
                   parameters:parameters
-                     headers:headers
                     progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -359,7 +364,6 @@ static NSString *AGORA_EDU_SDK_BASE_URL = @"https://api.agora.io";
     } else if (type == HttpTypeGet) {
         [sessionManager GET:encodeUrl
                  parameters:parameters
-                    headers:headers
                    progress:^(NSProgress * _Nonnull uploadProgress) {
 
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -374,7 +378,6 @@ static NSString *AGORA_EDU_SDK_BASE_URL = @"https://api.agora.io";
     } else if (type == HttpTypeDelete) {
         [sessionManager DELETE:encodeUrl
                     parameters:parameters
-                       headers:headers
                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             sucBlock(responseObject);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -391,7 +394,6 @@ static NSString *AGORA_EDU_SDK_BASE_URL = @"https://api.agora.io";
         
         [sessionManager DELETE:encodeUrl
                     parameters:parameters
-                       headers:headers
                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             sucBlock(responseObject);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
