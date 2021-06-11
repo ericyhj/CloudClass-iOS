@@ -6,7 +6,6 @@
 //
 
 import AgoraEduContext
-import AgoraUIEduBaseViews.AgoraFiles.AgoraRefresh
 import AgoraUIBaseViews
 
 @objcMembers public class AgoraUIChatView: AgoraBaseUIView {

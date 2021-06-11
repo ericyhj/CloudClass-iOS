@@ -5,7 +5,6 @@
 //  Created by SRS on 2021/2/13.
 //
 
-import AgoraUIEduBaseViews.AgoraFiles.AgoraAnimatedImage
 import AgoraUIBaseViews
 
 @objcMembers public class AgoraAlertImageModel: NSObject {

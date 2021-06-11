@@ -11,8 +11,8 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "ssh://git@git.agoralab.co/aduc/cloudclass-ios.git", :tag => "#{spec.version}" }
   
   spec.module_name   = 'AgoraUIEduBaseViews'
-  spec.module_map = 'AgoraUIEduBaseViews/AgoraUIEduBaseViews.modulemap'
-  spec.preserve_path = 'AgoraUIEduBaseViews/AgoraUIEduBaseViews.modulemap'
+  # spec.module_map = 'AgoraUIEduBaseViews/AgoraUIEduBaseViews.modulemap'
+  # spec.preserve_path = 'AgoraUIEduBaseViews/AgoraUIEduBaseViews.modulemap'
 
   spec.dependency "AgoraUIBaseViews"
 
