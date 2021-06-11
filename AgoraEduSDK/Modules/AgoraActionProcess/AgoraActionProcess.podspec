@@ -11,8 +11,8 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => "https://github.com/AgoraIO-Usecase/eEducation.git", :tag => "#{spec.version}" }
 
-  spec.preserve_path = 'AgoraActionProcess/AgoraActionProcess.modulemap'
-  spec.module_map = 'AgoraActionProcess/AgoraActionProcess.modulemap'
+  # spec.preserve_path = 'AgoraActionProcess/AgoraActionProcess.modulemap'
+  # spec.module_map = 'AgoraActionProcess/AgoraActionProcess.modulemap'
 
   spec.subspec 'OC' do |oc_spec|
     oc_spec.source_files  = "AgoraActionProcess/**/*.{swift,h,m}"

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import AgoraActionProcess.OCFile.HTTP
 
 public typealias AgoraActionHTTPSuccess = (AgoraActionResponse?) -> Void
 public typealias AgoraActionHTTPFailure = (Error) -> Void
