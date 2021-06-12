@@ -19,7 +19,7 @@
 #import "AgoraRTELogService.h"
 #import "AgoraRTEKVCClassroomConfig.h"
 #import <objc/runtime.h>
-#import <EduSDK/EduSDK-Swift.h>
+#import "EduSDK-Swift.h"
 
 static NSString *AGORA_EDU_BASE_URL = @"https://api.agora.io/scene";
 

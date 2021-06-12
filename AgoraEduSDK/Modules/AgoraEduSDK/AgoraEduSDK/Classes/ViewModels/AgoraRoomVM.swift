@@ -8,7 +8,6 @@
 
 import EduSDK
 import AgoraUIEduBaseViews
-import AgoraEduSDK.AgoraFiles.AgoraManager
 import AgoraEduContext
 
 @objcMembers public class AgoraRoomVM: AgoraBaseVM {

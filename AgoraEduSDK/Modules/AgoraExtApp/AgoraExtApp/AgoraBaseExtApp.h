@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AgoraUIBaseViews/AgoraUIBaseViews-Swift.h>
+#import "AgoraUIBaseViews-Swift.h"
 #import "AgoraExtAppObjects.h"
 
 NS_ASSUME_NONNULL_BEGIN

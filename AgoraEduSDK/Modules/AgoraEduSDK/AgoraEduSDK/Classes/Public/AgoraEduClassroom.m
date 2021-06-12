@@ -5,7 +5,7 @@
 //  Created by SRS on 2021/1/9.
 //
 
-#import <AgoraUIEduBaseViews/AgoraUIEduBaseViews-Swift.h>
+#import "AgoraUIEduBaseViews-Swift.h"
 #import "AgoraEduClassroom.h"
 #import "AgoraEduReplay.h"
 #import "AgoraEduTopVC.h"

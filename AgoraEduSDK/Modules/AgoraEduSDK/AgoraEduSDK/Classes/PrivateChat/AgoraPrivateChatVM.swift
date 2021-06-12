@@ -8,9 +8,8 @@
 
 import Foundation
 import AgoraUIEduBaseViews
-import AgoraEduSDK.AgoraFiles.AgoraHTTP
-import AgoraEduSDK.AgoraFiles.AgoraManager
 import AgoraEduContext
+import EduSDK
 
 @objcMembers public class AgoraPrivateChatVM: AgoraBaseVM {
     //

@@ -62,10 +62,10 @@ TODO: Add long description of the pod here.
   s.dependency "AgoraExtApp"
   s.dependency "AgoraEduContext"
   
-#  s.xcconfig = {
-#    'USER_HEADER_SEARCH_PATHS' => [
-#        '$(inherited)',
-#        '${PODS_CONFIGURATION_BUILD_DIR}/**'
-#    ]
-#  }
+  s.xcconfig = {
+    'USER_HEADER_SEARCH_PATHS' => [
+        '$(inherited)',
+        '${PODS_CONFIGURATION_BUILD_DIR}/**'
+    ]
+  }
 end

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		783AAEE325F4D1C100957598 /* AgoraViewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783AAEDE25F4D1C100957598 /* AgoraViewCategory.swift */; };
 		783AAEE425F4D1C100957598 /* AgoraPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783AAEDF25F4D1C100957598 /* AgoraPopover.swift */; };
-		86132E6725EE5CEF0055CA87 /* AgoraUIBaseViews.h in Headers */ = {isa = PBXBuildFile; fileRef = 86132E6525EE5CEF0055CA87 /* AgoraUIBaseViews.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86132E6F25EE5D090055CA87 /* AgoraUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86132E6E25EE5D090055CA87 /* AgoraUIElement.swift */; };
 		86132E7325EE5E1E0055CA87 /* AgoraUIViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86132E7225EE5E1E0055CA87 /* AgoraUIViews.swift */; };
 		861934AE262EB7CC008A11D4 /* AgoraUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861934AD262EB7CC008A11D4 /* AgoraUIExtension.swift */; };
@@ -19,7 +18,6 @@
 		783AAEDE25F4D1C100957598 /* AgoraViewCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgoraViewCategory.swift; sourceTree = "<group>"; };
 		783AAEDF25F4D1C100957598 /* AgoraPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgoraPopover.swift; sourceTree = "<group>"; };
 		86132E6225EE5CEF0055CA87 /* AgoraUIBaseViews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AgoraUIBaseViews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		86132E6525EE5CEF0055CA87 /* AgoraUIBaseViews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraUIBaseViews.h; sourceTree = "<group>"; };
 		86132E6625EE5CEF0055CA87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86132E6E25EE5D090055CA87 /* AgoraUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraUIElement.swift; sourceTree = "<group>"; };
 		86132E7225EE5E1E0055CA87 /* AgoraUIViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraUIViews.swift; sourceTree = "<group>"; };
@@ -58,7 +56,6 @@
 			children = (
 				783AAEDF25F4D1C100957598 /* AgoraPopover.swift */,
 				783AAEDE25F4D1C100957598 /* AgoraViewCategory.swift */,
-				86132E6525EE5CEF0055CA87 /* AgoraUIBaseViews.h */,
 				86132E6625EE5CEF0055CA87 /* Info.plist */,
 				86132E6E25EE5D090055CA87 /* AgoraUIElement.swift */,
 				86132E7225EE5E1E0055CA87 /* AgoraUIViews.swift */,
@@ -74,7 +71,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86132E6725EE5CEF0055CA87 /* AgoraUIBaseViews.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +296,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -327,6 +324,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

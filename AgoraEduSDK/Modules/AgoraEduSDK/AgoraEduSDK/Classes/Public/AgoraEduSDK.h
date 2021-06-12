@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "AgoraEduObjects.h"
 #import "AgoraEduClassroom.h"
+#import "AgoraExtAppObjects.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

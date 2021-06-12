@@ -38,8 +38,8 @@
 #import "AgoraRTEKVCUserConfig.h"
 #import "AgoraRTEManager.h"
 
-#import <EduSDK/EduSDK-Swift.h>
-#import <AgoraReport/AgoraReport-Swift.h>
+#import "EduSDK-Swift.h"
+#import "AgoraReport-Swift.h"
 
 #define AgoraRTE_NOTICE_KEY_ROOM_DESTORY @"AgoraRTE_NOTICE_KEY_ROOM_DESTORY"
 

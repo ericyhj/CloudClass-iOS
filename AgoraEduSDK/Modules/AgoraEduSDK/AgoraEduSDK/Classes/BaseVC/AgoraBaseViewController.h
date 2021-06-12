@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <AgoraEduSDK/AgoraEduSDK.h>
-#import <AgoraEduSDK/AgoraEduSDK-Swift.h>
-#import <AgoraEduContext/AgoraEduContext-Swift.h>
-#import <AgoraUIBaseViews/AgoraUIBaseViews-Swift.h>
-#import <AgoraUIEduBaseViews/AgoraUIEduBaseViews-Swift.h>
-#import <AgoraUIEduAppViews/AgoraUIEduAppViews-Swift.h>
+#import "AgoraEduSDK-Swift.h"
+#import "AgoraEduContext-Swift.h"
+#import "AgoraUIBaseViews-Swift.h"
+#import "AgoraUIEduBaseViews-Swift.h"
+#import "AgoraUIEduAppViews-Swift.h"
 #import "AgoraEduManager.h"
 #import "AgoraManagerCache.h"
 

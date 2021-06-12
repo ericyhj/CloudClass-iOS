@@ -17,11 +17,5 @@ Pod::Spec.new do |spec|
   spec.dependency "AFNetworking"
   spec.dependency "CocoaLumberjack", "3.6.1"
   spec.dependency "AliyunOSSiOS", "2.10.8"
-  
-#  spec.xcconfig = {
-#    'USER_HEADER_SEARCH_PATHS' => [
-#        '$(inherited)',
-#        '${PODS_CONFIGURATION_BUILD_DIR}/**'
-#    ]
-#  }
+
 end

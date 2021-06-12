@@ -12,7 +12,7 @@
 #import "AgoraRTEConfiguration.h"
 #import "AgoraRTEBaseTypes.h"
 #import "AgoraRTEManagerDelegate.h"
-@import AgoraLog.AgoraLogBaseTypes;
+#import "AgoraLog.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

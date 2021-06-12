@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Whiteboard/Whiteboard.h>
 #import "AgoraEduEnums.h"
-#import <AgoraExtApp/AgoraExtApp.h>
+//#import <AgoraExtApp/AgoraExtApp.h>
 
 NS_ASSUME_NONNULL_BEGIN
 /**设置全局配置*/

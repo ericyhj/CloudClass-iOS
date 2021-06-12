@@ -6,7 +6,8 @@
 //
 
 #import "AgoraExtAppController.h"
-#import <AgoraExtApp/AgoraExtApp-Swift.h>
+//#import <AgoraExtApp/AgoraExtApp-Swift.h>
+#import "AgoraExtApp-Swift.h"
 
 @interface AgoraExtAppsController ()
 @property (nonatomic, strong) AgoraBaseUIView *containerView;

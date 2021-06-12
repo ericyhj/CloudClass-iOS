@@ -6,8 +6,8 @@
 //
 
 #import <AgoraWhiteBoard/AgoraWhiteURLSchemeHandler.h>
-#import <AgoraReport/AgoraReport-Swift.h>
-#import <AgoraEduSDK/AgoraEduSDK-Swift.h>
+#import "AgoraReport-Swift.h"
+#import "AgoraEduSDK-Swift.h"
 #import <YYModel/YYModel.h>
 #import "AgoraEduSDK.h"
 #import "AgoraEduManager.h"

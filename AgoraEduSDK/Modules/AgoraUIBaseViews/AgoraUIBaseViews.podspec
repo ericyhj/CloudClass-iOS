@@ -9,19 +9,10 @@ Pod::Spec.new do |spec|
   spec.author       = { "Cavan" => "suruoxi@agora.io" }
   spec.ios.deployment_target = "10.0"
   spec.source       = { :git => "ssh://git@git.agoralab.co/aduc/cloudclass-ios.git", :tag => "#{spec.version}" }
-  
-  spec.source_files = "AgoraUIBaseViews/*.{h,m,swift}"
-  spec.public_header_files = "AgoraUIBaseViews/*.h"
 
   spec.source_files  = "AgoraUIBaseViews/*.{h,m,swift}"
   spec.public_header_files = "AgoraUIBaseViews/*.h"
   spec.module_name   = 'AgoraUIBaseViews'
   spec.swift_versions = ['5.0', '5.1', '5.2', '5.3']
   
-#  spec.xcconfig = { 
-#    'USER_HEADER_SEARCH_PATHS' => [
-#        '$(inherited)', 
-#        '${PODS_CONFIGURATION_BUILD_DIR}/**'
-#    ]
-#  }
 end

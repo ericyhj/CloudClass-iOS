@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AgoraUIBaseViews/AgoraUIBaseViews-Swift.h>
+#import "AgoraUIBaseViews-Swift.h"
 #import "AgoraExtAppObjects.h"
 #import "AgoraBaseExtApp.h"
 

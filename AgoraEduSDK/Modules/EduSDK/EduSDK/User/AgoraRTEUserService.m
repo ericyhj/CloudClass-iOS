@@ -26,7 +26,7 @@
 
 #import "AgoraRTEChannelMessageHandle.h"
 #import "AgoraRTEKVCUserConfig.h"
-#import <EduSDK/EduSDK-Swift.h>
+#import "EduSDK-Swift.h"
 
 @implementation AgoraRTERenderConfig
 @end

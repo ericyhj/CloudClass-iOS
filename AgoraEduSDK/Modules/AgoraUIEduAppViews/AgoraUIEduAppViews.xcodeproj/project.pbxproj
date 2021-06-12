@@ -31,7 +31,6 @@
 		8619386C263162C4008A11D4 /* AgoraSmallRenderUIController+UIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86193868263162C4008A11D4 /* AgoraSmallRenderUIController+UIEvent.swift */; };
 		86193A332632D015008A11D4 /* AgoraUIManager+Lecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86193A322632D015008A11D4 /* AgoraUIManager+Lecture.swift */; };
 		864CCE0B262AD86000C10042 /* AgoraWhiteBoardUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864CCE09262AD86000C10042 /* AgoraWhiteBoardUIController.swift */; };
-		868D62B725EF7A6200E914F2 /* AgoraUIEduAppViews.h in Headers */ = {isa = PBXBuildFile; fileRef = 868D62B525EF7A6200E914F2 /* AgoraUIEduAppViews.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86A3D1FE2609F1F20066BA1E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86A3D1E92609F1960066BA1E /* Localizable.strings */; };
 		86A3D1FF2609F1F20066BA1E /* reward.gif in Resources */ = {isa = PBXBuildFile; fileRef = 86A3D1EC2609F1960066BA1E /* reward.gif */; };
 		86A3D2032609F2040066BA1E /* AgoraUIEduAppViews.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 865F96F52604751A00CCF229 /* AgoraUIEduAppViews.xcassets */; };
@@ -76,7 +75,6 @@
 		864CCE09262AD86000C10042 /* AgoraWhiteBoardUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgoraWhiteBoardUIController.swift; sourceTree = "<group>"; };
 		865F96F52604751A00CCF229 /* AgoraUIEduAppViews.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AgoraUIEduAppViews.xcassets; sourceTree = "<group>"; };
 		868D62B225EF7A6200E914F2 /* AgoraUIEduAppViews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AgoraUIEduAppViews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		868D62B525EF7A6200E914F2 /* AgoraUIEduAppViews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraUIEduAppViews.h; sourceTree = "<group>"; };
 		868D62B625EF7A6200E914F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86A3D1EA2609F1960066BA1E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		86A3D1EB2609F1960066BA1E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 				8619378426305072008A11D4 /* UIManager */,
 				864CCE07262AD86000C10042 /* WhiteBoard */,
 				86A3D1E82609F1960066BA1E /* AgoraResources */,
-				868D62B525EF7A6200E914F2 /* AgoraUIEduAppViews.h */,
 				868D62B625EF7A6200E914F2 /* Info.plist */,
 				865F96F52604751A00CCF229 /* AgoraUIEduAppViews.xcassets */,
 			);
@@ -232,7 +229,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				868D62B725EF7A6200E914F2 /* AgoraUIEduAppViews.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
