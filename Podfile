@@ -31,7 +31,7 @@ workspace 'AgoraEducation.xcworkspace'
 install! 'cocoapods', :deterministic_uuids => false, :warn_for_unused_master_specs_repo => false
 
 target 'AgoraEducation' do
-  use_frameworks! :linkage => :static
+  use_modular_headers!
 
   pod "AFNetworking", '3.1.0'
   pod 'OpenSSL-Universal', '1.0.2.17'
