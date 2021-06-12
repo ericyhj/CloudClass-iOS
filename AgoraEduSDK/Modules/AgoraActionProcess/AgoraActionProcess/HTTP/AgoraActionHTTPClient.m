@@ -35,15 +35,7 @@
 
     [AgoraActionHTTPClient httpStartLogWithType:AgoraActionHttpTypeGet url:encodeUrl headers:headers params:params];
 
-    AFHTTPSessionManager *sessionManager = [AgoraActionHTTPClient sessionManager];
-    if(headers != nil && headers.allKeys.count > 0){
-        NSArray<NSString*> *keys = headers.allKeys;
-        for(NSString *key in keys){
-            [sessionManager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
-        }
-    }
-    
-    [sessionManager GET:encodeUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[AgoraActionHTTPClient sessionManager] GET:encodeUrl parameters:params headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         [AgoraActionHTTPClient httpSuccessLogWithType:AgoraActionHttpTypeGet url:encodeUrl responseObject:responseObject];
 
@@ -75,15 +67,7 @@
     NSString *encodeUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [AgoraActionHTTPClient httpStartLogWithType:AgoraActionHttpTypePost url:encodeUrl headers:headers params:params];
     
-    AFHTTPSessionManager *sessionManager = [AgoraActionHTTPClient sessionManager];
-    if(headers != nil && headers.allKeys.count > 0){
-        NSArray<NSString*> *keys = headers.allKeys;
-        for(NSString *key in keys){
-            [sessionManager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
-        }
-    }
-    
-    [sessionManager POST:encodeUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[AgoraActionHTTPClient sessionManager] POST:encodeUrl parameters:params headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         [AgoraActionHTTPClient httpSuccessLogWithType:AgoraActionHttpTypePost url:encodeUrl responseObject:responseObject];
         if (success) {
@@ -115,15 +99,7 @@
 
     [AgoraActionHTTPClient httpStartLogWithType:AgoraActionHttpTypePut url:encodeUrl headers:headers params:params];
 
-    AFHTTPSessionManager *sessionManager = [AgoraActionHTTPClient sessionManager];
-    if(headers != nil && headers.allKeys.count > 0){
-        NSArray<NSString*> *keys = headers.allKeys;
-        for(NSString *key in keys){
-            [sessionManager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
-        }
-    }
-    
-    [sessionManager PUT:encodeUrl parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[AgoraActionHTTPClient sessionManager] PUT:encodeUrl parameters:params headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         [AgoraActionHTTPClient httpSuccessLogWithType:AgoraActionHttpTypePut url:encodeUrl responseObject:responseObject];
 
@@ -156,15 +132,7 @@
 
     [AgoraActionHTTPClient httpStartLogWithType:AgoraActionHttpTypeDelete url:encodeUrl headers:headers params:params];
 
-    AFHTTPSessionManager *sessionManager = [AgoraActionHTTPClient sessionManager];
-    if(headers != nil && headers.allKeys.count > 0){
-        NSArray<NSString*> *keys = headers.allKeys;
-        for(NSString *key in keys){
-            [sessionManager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
-        }
-    }
-    
-    [sessionManager DELETE:encodeUrl parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[AgoraActionHTTPClient sessionManager] DELETE:encodeUrl parameters:params headers:headers success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         [AgoraActionHTTPClient httpSuccessLogWithType:AgoraActionHttpTypeDelete url:encodeUrl responseObject:responseObject];
 

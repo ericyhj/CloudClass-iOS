@@ -38,6 +38,11 @@ TODO: Add long description of the pod here.
     "AgoraEduSDK/**/AgoraRefresh/**/*.h",
     "AgoraEduSDK/**/AgoraAnimatedImage/**/*.h"
   ]
+
+  s.private_header_files = [
+    "AgoraEduSDK/**/ReportObjects/*.h"
+  ]
+
   s.prefix_header_file = 'AgoraEduSDK/AgoraEduSDK.pch'
   s.preserve_path = 'AgoraEduSDK/AgoraEduSDK.modulemap'
   s.module_map = 'AgoraEduSDK/AgoraEduSDK.modulemap'
@@ -54,11 +59,19 @@ TODO: Add long description of the pod here.
   s.dependency "AgoraLog"
   s.dependency "EduSDK"
   s.dependency "AgoraWhiteBoard"
+  s.dependency "AgoraHandsUp"
+  s.dependency "AgoraActionProcess"
   s.dependency "AgoraReport"
+
+  s.dependency "AgoraHandsUp"
   s.dependency "AgoraActionProcess"
   s.dependency "AgoraUIEduAppViews"
   s.dependency "AgoraUIEduBaseViews"
   s.dependency "AgoraUIBaseViews"
   s.dependency "AgoraExtApp"
   s.dependency "AgoraEduContext"
+  s.dependency "AgoraWidget"
+  s.dependency "Protobuf"
+  
+  s.swift_versions = ['5.0', '5.1', '5.2', '5.3', '5.4']
 end

@@ -58,7 +58,7 @@ static AgoraLogHttpClient *manager = nil;
                      ", url, headers, params];
     [manager.logManager logMessage:msg level:AgoraLogLevelInfo];
     
-    [AgoraLogHttpClient.shareManager.sessionManager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [AgoraLogHttpClient.shareManager.sessionManager GET:url parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSString *msg = [NSString stringWithFormat:
                          @"\n============>Get HTTP Success<============\n\
@@ -103,7 +103,7 @@ static AgoraLogHttpClient *manager = nil;
                      ", url, headers, params];
     [manager.logManager logMessage:msg level:AgoraLogLevelInfo];
     
-    [AgoraLogHttpClient.shareManager.sessionManager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [AgoraLogHttpClient.shareManager.sessionManager POST:url parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSString *msg = [NSString stringWithFormat:
                          @"\n============>Post HTTP Success<============\n\

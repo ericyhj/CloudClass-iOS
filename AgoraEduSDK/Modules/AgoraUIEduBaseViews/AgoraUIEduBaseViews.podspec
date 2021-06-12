@@ -11,8 +11,8 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "ssh://git@git.agoralab.co/aduc/cloudclass-ios.git", :tag => "#{spec.version}" }
   
   spec.module_name   = 'AgoraUIEduBaseViews'
-  # spec.module_map = 'AgoraUIEduBaseViews/AgoraUIEduBaseViews.modulemap'
-  # spec.preserve_path = 'AgoraUIEduBaseViews/AgoraUIEduBaseViews.modulemap'
+  spec.module_map = 'AgoraUIEduBaseViews/AgoraUIEduBaseViews.modulemap'
+  spec.preserve_path = 'AgoraUIEduBaseViews/AgoraUIEduBaseViews.modulemap'
 
   spec.dependency "AgoraUIBaseViews"
 
@@ -27,6 +27,7 @@ Pod::Spec.new do |spec|
 
     source.dependency "AgoraExtApp"
     source.dependency "AgoraEduContext"
+    source.dependency "AgoraWidget"
   end
 
   spec.subspec 'BINARY' do |binary|
@@ -54,5 +55,4 @@ Pod::Spec.new do |spec|
 
   spec.swift_versions = ['5.0', '5.1', '5.2', '5.3', '5.4']
   spec.default_subspec = 'BINARY'
-
 end

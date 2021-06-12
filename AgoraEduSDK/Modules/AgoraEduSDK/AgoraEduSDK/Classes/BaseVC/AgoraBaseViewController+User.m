@@ -35,7 +35,29 @@
     [self.eventDispatcher onShowUserTips:message];
 }
 
+- (void)onFlexUserPropertiesChanged:(NSDictionary *)changedProperties
+                         properties:(NSDictionary *)properties
+                              cause:(NSDictionary *)cause
+                           fromUser:(AgoraEduContextUserDetailInfo *)fromUser
+                       operatorUser:(AgoraEduContextUserInfo *)operatorUser {
+    [self.eventDispatcher onFlexUserPropertiesChanged:changedProperties
+                                           properties:properties
+                                                cause:cause
+                                             fromUser:fromUser
+                                             operator:operatorUser];
+}
+
 #pragma mark AgoraEduUserContext
+- (void)updateFlexUserProperties:(NSString *)userUuid
+                      properties:(NSDictionary<NSString *,NSString *> *)properties
+                           cause:(NSDictionary<NSString *,NSString *> *)cause {
+    [self.userVM updateUserProperties:userUuid
+                           properties:properties
+                                cause:cause
+                         successBlock:^{}
+                         failureBlock:^(AgoraEduContextError * _Nonnull error) {}];
+}
+
 - (void)muteVideo:(BOOL)mute {
     AgoraWEAK(self);
     [self.userVM updateLocalVideoStream:mute
@@ -56,14 +78,33 @@
     }];
 }
 
+- (void)setVideoConfig:(AgoraEduContextVideoConfig *)videoConfig {
+    AgoraRTEVideoConfig * config = [AgoraRTEVideoConfig defaultVideoConfig];
+    config.videoDimensionWidth = videoConfig.videoDimensionWidth;
+    config.videoDimensionHeight = videoConfig.videoDimensionHeight;
+    config.frameRate = videoConfig.frameRate;
+    [AgoraEduManager.shareManager.studentService setVideoConfig:config];
+}
+
 - (void)renderView:(UIView * _Nullable)view
         streamUuid:(NSString *)streamUuid {
-    
+    [self renderView:view
+          streamUuid:streamUuid
+        renderConfig:[[AgoraEduContextRenderConfig alloc] initWithRenderMode:AgoraEduContextRenderModeHidden]];
+}
+
+- (void)renderView:(UIView *)view
+        streamUuid:(NSString *)streamUuid
+      renderConfig:(AgoraEduContextRenderConfig *)renderConfig {
     AgoraWEAK(self);
     [self.userVM getStreamInfoWithStreamUuid:streamUuid
                                 successBlock:^(AgoraRTEStream *stream) {
         AgoraRTERenderConfig *config = [AgoraRTERenderConfig new];
-        config.renderMode = AgoraRTERenderModeHidden;
+        if (renderConfig.renderMode == AgoraEduContextRenderModeFit) {
+            config.renderMode = AgoraRTERenderModeFit;
+        } else {
+            config.renderMode = AgoraRTERenderModeHidden;
+        }
         
         if (stream.sourceType == AgoraRTEVideoSourceTypeScreen) {
             config.renderMode = AgoraRTERenderModeFit;
@@ -88,7 +129,8 @@
         [weakself onShowErrorInfo:error];
     }];
 }
+
 - (void)registerEventHandler:(id<AgoraEduUserHandler>)handler {
-    [self.eventDispatcher registerWithObject:handler];
+    [self.eventDispatcher registerWithObject:handler eventType:AgoraUIEventTypeUser];
 }
 @end

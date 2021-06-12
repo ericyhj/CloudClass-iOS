@@ -5,6 +5,7 @@
 //  Created by SRS on 2021/2/13.
 //
 
+import AgoraUIEduBaseViews.AgoraFiles.AgoraAnimatedImage
 import AgoraUIBaseViews
 
 @objcMembers public class AgoraAlertImageModel: NSObject {
@@ -187,6 +188,21 @@ import AgoraUIBaseViews
             view.layoutIfNeeded()
         } completion: { (_) in
             
+        }
+    }
+    
+    
+    // MARK: Touch
+    @objc fileprivate func buttonTap(_ btn: AgoraBaseUIButton) {
+        guard let btnModels = self.styleModel?.buttons, btn.tag < btnModels.count else {
+            return
+        }
+        
+        UIView.animate(withDuration: 0.25) {
+            self.alpha = 0
+        } completion: { (_) in
+            self.removeFromSuperview()
+            btnModels[btn.tag].tapActionBlock?(btn.tag)
         }
     }
 }
@@ -372,22 +388,6 @@ extension AgoraAlertView {
             self.contentView.agora_height =  self.contentView.agora_width
         } else {
             self.contentView.agora_height = btnViewBottom
-        }
-    }
-}
-
-// MARK: Touch
-extension AgoraAlertView {
-    @objc fileprivate func buttonTap(_ btn: AgoraBaseUIButton) {
-        guard let btnModels = self.styleModel?.buttons, btn.tag < btnModels.count else {
-            return
-        }
-        
-        UIView.animate(withDuration: 0.25) {
-            self.alpha = 0
-        } completion: { (_) in
-            self.removeFromSuperview()
-            btnModels[btn.tag].tapActionBlock?(btn.tag)
         }
     }
 }

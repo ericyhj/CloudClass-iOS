@@ -115,16 +115,23 @@ typedef NS_ENUM(NSUInteger, AgoraRTESyncStreamState) {
 }
 
 - (NSError * _Nullable)setVideoConfig:(AgoraRTEVideoConfig*)config {
+    AgoraRTEVideoConfig *finalConfig = [AgoraRTEVideoConfig defaultVideoConfig];
+    finalConfig.videoDimensionWidth = config.videoDimensionWidth ? config.videoDimensionWidth : finalConfig.videoDimensionWidth;
+    finalConfig.videoDimensionHeight = config.videoDimensionHeight ? config.videoDimensionHeight : finalConfig.videoDimensionHeight;
+    finalConfig.frameRate = config.frameRate ? config.frameRate : finalConfig.frameRate;
+    finalConfig.bitrate = config.bitrate ? config.bitrate : finalConfig.bitrate;
+    finalConfig.orientationMode = config.orientationMode ? config.orientationMode : finalConfig.orientationMode;
+    finalConfig.degradationPreference = config.degradationPreference ? config.degradationPreference : finalConfig.degradationPreference;
     
     [AgoraRTELogService logMessageWithDescribe:@"user setVideoConfig:" message:@{@"roomUuid":AgoraRTENoNullString(self.channelId), @"config":AgoraRTENoNull(config)}];
     
     AgoraVideoEncoderConfiguration *configuration = [AgoraVideoEncoderConfiguration new];
-    configuration.dimensions = CGSizeMake(config.videoDimensionWidth, config.videoDimensionHeight);
-    configuration.frameRate = config.frameRate;
-    configuration.bitrate = config.bitrate;
+    configuration.dimensions = CGSizeMake(finalConfig.videoDimensionWidth, finalConfig.videoDimensionHeight);
+    configuration.frameRate = finalConfig.frameRate;
+    configuration.bitrate = finalConfig.bitrate;
     configuration.orientationMode = AgoraVideoOutputOrientationModeAdaptative;
     
-    switch (config.degradationPreference) {
+    switch (finalConfig.degradationPreference) {
         case AgoraRTEDegradationMaintainQuality:
             configuration.degradationPreference = AgoraDegradationMaintainQuality;
             break;
@@ -205,7 +212,6 @@ typedef NS_ENUM(NSUInteger, AgoraRTESyncStreamState) {
 }
 
 - (NSError * _Nullable)switchCamera {
-    
     int errCode = [AgoraRTCManager.shareManager switchCamera];
     if(errCode == 0) {
         return nil;
@@ -213,6 +219,12 @@ typedef NS_ENUM(NSUInteger, AgoraRTESyncStreamState) {
         NSError *error = [AgoraRTEErrorManager mediaError:errCode codeMsg:[AgoraRTCManager getErrorDescription:errCode] code:201];
         return error;
     }
+}
+- (int)setEnableSpeakerphone:(BOOL)enable {
+    return [AgoraRTCManager.shareManager setEnableSpeakerphone:enable];
+}
+- (BOOL)isSpeakerphoneEnabled {
+    return [AgoraRTCManager.shareManager isSpeakerphoneEnabled];
 }
 
 // stream
@@ -617,7 +629,7 @@ typedef NS_ENUM(NSUInteger, AgoraRTESyncStreamState) {
     AgoraRtcVideoCanvas *videoCanvas = [[AgoraRtcVideoCanvas alloc] init];
     videoCanvas.uid = streamUuid;
     videoCanvas.view = view;
-    videoCanvas.channel = self.channelId;
+    videoCanvas.channelId = self.channelId;
     if (config.renderMode == AgoraRTERenderModeFit) {
         videoCanvas.renderMode = AgoraVideoRenderModeFit;
     } else if (config.renderMode == AgoraRTERenderModeHidden) {

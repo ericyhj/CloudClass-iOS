@@ -58,7 +58,7 @@ static AgoraRTEHttpClient *manager = nil;
     
     [AgoraRTEHttpClient httpStartLogWithType:AgoraHttpTypeGet url:encodeUrl headers:headers params:params];
     
-    [AgoraRTEHttpClient.shareManager.sessionManager GET:encodeUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [AgoraRTEHttpClient.shareManager.sessionManager GET:encodeUrl parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [AgoraRTEHttpClient httpSuccessLogWithType:AgoraHttpTypeGet url:encodeUrl responseObject:responseObject];
         
@@ -97,7 +97,7 @@ static AgoraRTEHttpClient *manager = nil;
     NSString *encodeUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [AgoraRTEHttpClient httpStartLogWithType:AgoraHttpTypePost url:encodeUrl headers:headers params:params];
     
-    [AgoraRTEHttpClient.shareManager.sessionManager POST:encodeUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [AgoraRTEHttpClient.shareManager.sessionManager POST:encodeUrl parameters:params headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [AgoraRTEHttpClient httpSuccessLogWithType:AgoraHttpTypePost url:encodeUrl responseObject:responseObject];
         if (success) {
@@ -136,7 +136,7 @@ static AgoraRTEHttpClient *manager = nil;
     
     [AgoraRTEHttpClient httpStartLogWithType:AgoraHttpTypePut url:encodeUrl headers:headers params:params];
     
-    [AgoraRTEHttpClient.shareManager.sessionManager PUT:encodeUrl parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [AgoraRTEHttpClient.shareManager.sessionManager PUT:encodeUrl parameters:params headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [AgoraRTEHttpClient httpSuccessLogWithType:AgoraHttpTypePut url:encodeUrl responseObject:responseObject];
 
@@ -176,7 +176,7 @@ static AgoraRTEHttpClient *manager = nil;
     
     [AgoraRTEHttpClient httpStartLogWithType:AgoraHttpTypeDelete url:encodeUrl headers:headers params:params];
     
-    [AgoraRTEHttpClient.shareManager.sessionManager DELETE:encodeUrl parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [AgoraRTEHttpClient.shareManager.sessionManager DELETE:encodeUrl parameters:params headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [AgoraRTEHttpClient httpSuccessLogWithType:AgoraHttpTypeDelete url:encodeUrl responseObject:responseObject];
 

@@ -40,16 +40,8 @@ typedef NS_ENUM(NSInteger, AgoraEducationHttpType) {
     NSString *encodeUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 
     [AgoraEducationHTTPClient httpStartLogWithType:AgoraEducationHttpTypeGet url:encodeUrl headers:headers params:params];
-    
-    AFHTTPSessionManager *sessionManager = [AgoraEducationHTTPClient sessionManager];
-    if(headers != nil && headers.allKeys.count > 0){
-        NSArray<NSString*> *keys = headers.allKeys;
-        for(NSString *key in keys){
-            [sessionManager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
-        }
-    }
 
-    [sessionManager GET:encodeUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[AgoraEducationHTTPClient sessionManager] GET:encodeUrl parameters:params headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         [AgoraEducationHTTPClient httpSuccessLogWithType:AgoraEducationHttpTypeGet url:encodeUrl responseObject:responseObject];
 
@@ -81,15 +73,7 @@ typedef NS_ENUM(NSInteger, AgoraEducationHttpType) {
     NSString *encodeUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [AgoraEducationHTTPClient httpStartLogWithType:AgoraEducationHttpTypePost url:encodeUrl headers:headers params:params];
     
-    AFHTTPSessionManager *sessionManager = [AgoraEducationHTTPClient sessionManager];
-    if(headers != nil && headers.allKeys.count > 0){
-        NSArray<NSString*> *keys = headers.allKeys;
-        for(NSString *key in keys){
-            [sessionManager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
-        }
-    }
-    
-    [sessionManager POST:encodeUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[AgoraEducationHTTPClient sessionManager] POST:encodeUrl parameters:params headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         [AgoraEducationHTTPClient httpSuccessLogWithType:AgoraEducationHttpTypePost url:encodeUrl responseObject:responseObject];
         if (success) {
@@ -121,15 +105,7 @@ typedef NS_ENUM(NSInteger, AgoraEducationHttpType) {
 
     [AgoraEducationHTTPClient httpStartLogWithType:AgoraEducationHttpTypePut url:encodeUrl headers:headers params:params];
 
-    AFHTTPSessionManager *sessionManager = [AgoraEducationHTTPClient sessionManager];
-    if(headers != nil && headers.allKeys.count > 0){
-        NSArray<NSString*> *keys = headers.allKeys;
-        for(NSString *key in keys){
-            [sessionManager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
-        }
-    }
-    
-    [sessionManager PUT:encodeUrl parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[AgoraEducationHTTPClient sessionManager] PUT:encodeUrl parameters:params headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         [AgoraEducationHTTPClient httpSuccessLogWithType:AgoraEducationHttpTypePut url:encodeUrl responseObject:responseObject];
 
@@ -161,17 +137,8 @@ typedef NS_ENUM(NSInteger, AgoraEducationHttpType) {
     NSString *encodeUrl = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 
     [AgoraEducationHTTPClient httpStartLogWithType:AgoraEducationHttpTypeDelete url:encodeUrl headers:headers params:params];
-    
-    
-    AFHTTPSessionManager *sessionManager = [AgoraEducationHTTPClient sessionManager];
-    if(headers != nil && headers.allKeys.count > 0){
-        NSArray<NSString*> *keys = headers.allKeys;
-        for(NSString *key in keys){
-            [sessionManager.requestSerializer setValue:headers[key] forHTTPHeaderField:key];
-        }
-    }
-    
-    [sessionManager DELETE:encodeUrl parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+
+    [[AgoraEducationHTTPClient sessionManager] DELETE:encodeUrl parameters:params headers:headers success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         [AgoraEducationHTTPClient httpSuccessLogWithType:AgoraEducationHttpTypeDelete url:encodeUrl responseObject:responseObject];
 

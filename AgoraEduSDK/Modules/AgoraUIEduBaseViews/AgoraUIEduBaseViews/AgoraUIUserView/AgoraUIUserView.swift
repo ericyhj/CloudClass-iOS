@@ -148,6 +148,23 @@ public protocol AgoraUIUserViewDelegate: NSObjectProtocol {
         return view
     }()
     
+    public lazy var maxCoverView: AgoraBaseUIView = {
+        let maxCoverView = AgoraBaseUIView()
+        maxCoverView.backgroundColor = .black
+        
+        let label = AgoraBaseUILabel()
+        label.text = AgoraKitLocalizedString("RenderAsMaxText")
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 13)
+
+        maxCoverView.addSubview(label)
+        label.agora_center_x = 0
+        label.agora_center_y = 0
+        
+        maxCoverView.isHidden = true
+        return maxCoverView
+    }()
+    
     private weak var defaultImageView: AgoraBaseUIImageView?
     private let RoundLabelTag: Int = 99
     private let AudioEffectTagStart: Int = 100
@@ -166,6 +183,19 @@ public protocol AgoraUIUserViewDelegate: NSObjectProtocol {
     
     func setVideoButtonHidden(hidden: Bool) {
         isVideoButtonHidden = hidden
+    }
+    
+    // MARK: touch event
+    @objc  func onAudioTouchEvent(_ button: AgoraBaseUIButton) {
+        delegate?.userView(self,
+                           didPressAudioButton: button,
+                           indexOfUserList: index)
+    }
+    
+    @objc func onVideoTouchEvent(_ button: AgoraBaseUIButton) {
+        delegate?.userView(self,
+                           didPressVideoButton: button,
+                           indexOfUserList: index)
     }
 }
 
@@ -186,6 +216,7 @@ private extension AgoraUIUserView {
         addSubview(nameLabel)
         addSubview(audioEffectView)
         addSubview(whiteBoardImageView)
+        addSubview(maxCoverView)
     }
     
     func initLayout() {
@@ -218,6 +249,10 @@ private extension AgoraUIUserView {
         whiteBoardImageView.agora_bottom = 5
         whiteBoardImageView.agora_resize(18, 18)
         
+        maxCoverView.agora_move(0, 0)
+        maxCoverView.agora_right = 0
+        maxCoverView.agora_bottom = 0
+        
         let audioEffectViewWidth = self.audioBtn.agora_width * 0.8
         let audioEffectHeight: CGFloat = AgoraKitDeviceAssistant.OS.isPad ? 3 : 2
         let audioEffectGap: CGFloat = AgoraKitDeviceAssistant.OS.isPad ? 3 : 2
@@ -240,23 +275,17 @@ private extension AgoraUIUserView {
     }
 }
 
-// MARK: - UIButton Event
-private extension AgoraUIUserView {
-    @objc  func onAudioTouchEvent(_ button: AgoraBaseUIButton) {
-        delegate?.userView(self,
-                           didPressAudioButton: button,
-                           indexOfUserList: index)
-    }
-    
-    @objc func onVideoTouchEvent(_ button: AgoraBaseUIButton) {
-        delegate?.userView(self,
-                           didPressVideoButton: button,
-                           indexOfUserList: index)
-    }
-}
-
 // MARK: - Update views
 private extension AgoraUIUserView {
+    func updateRenderMode(largeRenderFlag: Bool) {
+        if largeRenderFlag {
+            maxCoverView.isHidden = false
+            bringSubviewToFront(maxCoverView)
+        } else {
+            maxCoverView.isHidden = true
+        }
+    }
+    
     func updateUserName(userInfo: AgoraEduContextUserDetailInfo?) {
         self.nameLabel.isHidden = true
         
@@ -322,7 +351,11 @@ private extension AgoraUIUserView {
         }
         
         // 摄像头状态
-        if info.cameraState == .notAvailable {
+        if info.cameraState == .close {
+            self.defaultView.isHidden = false
+            self.defaultImageView?.image = AgoraKitImage("default_close")
+            
+        } else if info.cameraState == .notAvailable {
             self.defaultView.isHidden = false
             self.defaultImageView?.image = AgoraKitImage("default_baddevice")
             
@@ -366,7 +399,9 @@ private extension AgoraUIUserView {
 }
 
 extension AgoraUIUserView {
-    public func update(with info: AgoraEduContextUserDetailInfo?) {
+    public func update(with info: AgoraEduContextUserDetailInfo?,
+                                              largeRenderFlag: Bool = false) {
+        self.updateRenderMode(largeRenderFlag: largeRenderFlag)
         self.updateDefaultView(userInfo: info)
         self.updateUserName(userInfo: info)
         self.updateUserReward(userInfo: info)

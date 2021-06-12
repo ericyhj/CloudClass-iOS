@@ -9,7 +9,7 @@ import AgoraUIEduBaseViews
 import AgoraUIBaseViews
 import AgoraEduContext
 
-class AgoraRenderUIController: NSObject, AgoraUIController {
+@objcMembers class AgoraRenderUIController: NSObject, AgoraUIController {
     private(set) var viewType: AgoraEduContextAppType
     
     var roomContext: AgoraEduRoomContext? {
@@ -35,8 +35,10 @@ class AgoraRenderUIController: NSObject, AgoraUIController {
     
     func updateUserView(_ view: AgoraUIUserView,
                         oldUserInfo: AgoraEduContextUserDetailInfo? = nil,
-                        newUserInfo: AgoraEduContextUserDetailInfo? = nil) {
-        view.update(with: newUserInfo)
+                        newUserInfo: AgoraEduContextUserDetailInfo? = nil,
+                        largeRenderFlag: Bool = false) {
+        view.update(with: newUserInfo,
+                    largeRenderFlag: largeRenderFlag)
         
         if let info = newUserInfo,
            info.enableVideo {
@@ -49,15 +51,23 @@ class AgoraRenderUIController: NSObject, AgoraUIController {
     }
     
     func renderVideoStream(_ streamUuid: String,
-                           on view: AgoraUIVideoCanvas) {
+                           on view: AgoraUIVideoCanvas,
+                           renderConfig: AgoraEduContextRenderConfig? = nil) {
         if let canvasStreamUuid = view.renderingStreamUuid,
            canvasStreamUuid == streamUuid {
             return
         }
         
         view.renderingStreamUuid = streamUuid
+        guard let renderConf = renderConfig else {
+            userContext?.renderView(view,
+                                    streamUuid: streamUuid)
+            return
+        }
+        
         userContext?.renderView(view,
-                                streamUuid: streamUuid)
+                                streamUuid: streamUuid,
+                                renderConfig: renderConf)
     }
     
     func unrenderVideoStream(_ streamUuid: String,

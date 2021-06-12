@@ -10,6 +10,7 @@
 #import "AgoraRTELogService.h"
 #import "AgoraRTELogService.h"
 #import <AgoraReport/AgoraReport.h>
+#import <AgoraReport/AgoraReport-Swift.h>
 #import <EduSDK/EduSDK-Swift.h>
 
 #define AgoraRTCNoNullString(x) ([x isKindOfClass:NSString.class] ? x : @"")
@@ -203,7 +204,11 @@ static AgoraRTCManager *manager = nil;
                 return 0;
             }
             
-            int code = [channelInfo.agoraRtcChannel setClientRole:role];
+            AgoraClientRoleOptions *options = [[AgoraClientRoleOptions alloc] init];
+            if (role == AgoraClientRoleAudience) {
+                options.audienceLatencyLevel = AgoraAudienceLatencyLevelLowLatency;
+            }
+            int code = [channelInfo.agoraRtcChannel setClientRole:role options:options];
             if (role == AgoraClientRoleAudience) {
                 [AgoraRTELogService logMessageWithDescribe:@"set role:" message:@{
                     @"roomUuid": AgoraRTCNoNullString(channelId),
@@ -352,7 +357,7 @@ static AgoraRTCManager *manager = nil;
     for(RTCChannelInfo *channelInfo in self.rtcChannelInfos) {
         if (channelInfo.agoraRtcChannel && [channelInfo.channelId isEqualToString:channelId]) {
             
-            NSUInteger streamUid = uid.integerValue;
+            NSUInteger streamUid = uid.longLongValue;
             int code = [channelInfo.agoraRtcChannel muteRemoteAudioStream:streamUid mute:mute];
             
             [AgoraRTELogService logMessageWithDescribe:@"muteRemoteAudioStream:" message:@{@"roomUuid":AgoraRTCNoNullString(channelId), @"uid":AgoraRTCNoNullString(uid), @"mute":@(mute), @"code":@(code)}];
@@ -369,7 +374,7 @@ static AgoraRTCManager *manager = nil;
     for(RTCChannelInfo *channelInfo in self.rtcChannelInfos) {
         if (channelInfo.agoraRtcChannel && [channelInfo.channelId isEqualToString:channelId]) {
             
-            NSUInteger streamUid = uid.integerValue;
+            NSUInteger streamUid = uid.longLongValue;
             int code = [channelInfo.agoraRtcChannel muteRemoteVideoStream:streamUid mute:mute];
             
             [AgoraRTELogService logMessageWithDescribe:@"muteRemoteVideoStream:" message:@{@"roomUuid":AgoraRTCNoNullString(channelId), @"uid":AgoraRTCNoNullString(uid), @"mute":@(mute), @"code":@(code)}];
@@ -420,7 +425,7 @@ static AgoraRTCManager *manager = nil;
 - (int)setupLocalVideo:(AgoraRtcVideoCanvas * _Nullable)local {
     
     int code =  [self.rtcEngineKit setupLocalVideo:local];
-    [AgoraRTELogService logMessageWithDescribe:@"setupLocalVideo:" message:@{@"roomUuid":local.channel, @"uid": @(local.uid), @"code":@(code)}];
+    [AgoraRTELogService logMessageWithDescribe:@"setupLocalVideo:" message:@{@"roomUuid":local.channelId, @"uid": @(local.uid), @"code":@(code)}];
     
     return code;
 }
@@ -428,13 +433,13 @@ static AgoraRTCManager *manager = nil;
 - (int)setupRemoteVideo:(AgoraRtcVideoCanvas * _Nonnull)remote {
     
     int code =  [self.rtcEngineKit setupRemoteVideo:remote];
-    [AgoraRTELogService logMessageWithDescribe:@"setupRemoteVideo:" message:@{@"roomUuid":remote.channel, @"uid": @(remote.uid), @"code":@(code)}];
+    [AgoraRTELogService logMessageWithDescribe:@"setupRemoteVideo:" message:@{@"roomUuid":remote.channelId, @"uid": @(remote.uid), @"code":@(code)}];
     
     return code;
 }
 
 - (int)setRemoteVideoStream:(NSString *)uid type:(AgoraVideoStreamType)streamType {
-    return [self.rtcEngineKit setRemoteVideoStream:uid.integerValue type:streamType];
+    return [self.rtcEngineKit setRemoteVideoStream:uid.longLongValue type:streamType];
 }
 
 #pragma mark Lastmile
@@ -594,7 +599,15 @@ static AgoraRTCManager *manager = nil;
     
     return [self.rtcEngineKit switchCamera];
 }
-
+- (int)setEnableSpeakerphone:(BOOL)enable {
+    [AgoraRTELogService logMessageWithDescribe:@"enableSpeakerphone:" message: @(enable)];
+    return [self.rtcEngineKit setEnableSpeakerphone:enable];
+}
+- (BOOL)isSpeakerphoneEnabled {
+    BOOL enable = [self.rtcEngineKit isSpeakerphoneEnabled];
+    [AgoraRTELogService logMessageWithDescribe:@"isSpeakerphoneEnabled:" message: @(enable)];
+    return enable;
+}
 - (int)enableInEarMonitoring:(BOOL)enabled {
     return [self.rtcEngineKit enableInEarMonitoring:enabled];
 }

@@ -17,25 +17,40 @@ def sourcePod
   pod 'AgoraUIEduBaseViews', :path => 'AgoraEduSDK/Modules/AgoraUIEduBaseViews/AgoraUIEduBaseViews.podspec', :subspecs => ['SOURCE']
 
   pod 'AgoraExtApp', :path => 'AgoraEduSDK/Modules/AgoraExtApp/AgoraExtApp.podspec'
+  pod 'AgoraWidget', :path => 'AgoraEduSDK/Modules/AgoraWidget/AgoraWidget.podspec'
   pod 'AgoraEduContext', :path => 'AgoraEduSDK/Modules/AgoraEduContext/AgoraEduContext.podspec'
 
   # if you use swift project, you just only change 'OC' to 'Swift'
+  pod 'AgoraHandsUp', :path => 'AgoraEduSDK/Modules/AgoraHandsUp/AgoraHandsUp.podspec', :subspecs => ['OC']
+
+  # if you use swift project, you just only change 'OC' to 'Swift'
   pod 'AgoraActionProcess', :path => 'AgoraEduSDK/Modules/AgoraActionProcess/AgoraActionProcess.podspec', :subspecs => ['OC']
+
+  pod 'Protobuf'
 end
 
 def binaryPod
   pod 'AgoraEduSDK', :path => 'AgoraEduSDK/AgoraEduSDK.podspec'
 end
 
+def uiSourcePod
+  pod 'AgoraEduSDK', :path => 'AgoraEduSDK/AgoraEduSDK.podspec', :subspecs => ['Core']  
+
+  pod 'AgoraUIBaseViews', :path => 'AgoraEduSDK/Modules/AgoraUIBaseViews/AgoraUIBaseViews.podspec'
+  pod 'AgoraUIEduBaseViews', :path => 'AgoraEduSDK/Modules/AgoraUIEduBaseViews/AgoraUIEduBaseViews.podspec', :subspecs => ['BINARY']
+  pod 'AgoraUIEduAppViews', :path => 'AgoraEduSDK/Modules/AgoraUIEduAppViews/AgoraUIEduAppViews.podspec', :subspecs => ['BINARY']
+end
+
 workspace 'AgoraEducation.xcworkspace'
 install! 'cocoapods', :deterministic_uuids => false, :warn_for_unused_master_specs_repo => false
 
 target 'AgoraEducation' do
-  use_frameworks! :linkage => :static
-
-  pod "AFNetworking", '3.1.0'
-  pod 'OpenSSL-Universal', '1.0.2.17'
+  use_frameworks!
   
+  pod "AFNetworking", "4.0.1"
+  pod 'OpenSSL-Universal', '1.0.2.17'
+
   sourcePod
   #binaryPod
+  #uiSourcePod
 end
