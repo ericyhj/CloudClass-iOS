@@ -39,8 +39,8 @@ TODO: Add long description of the pod here.
     "AgoraEduSDK/**/AgoraAnimatedImage/**/*.h"
   ]
   s.prefix_header_file = 'AgoraEduSDK/AgoraEduSDK.pch'
-  s.preserve_path = 'AgoraEduSDK/AgoraEduSDK.modulemap'
-  s.module_map = 'AgoraEduSDK/AgoraEduSDK.modulemap'
+  # s.preserve_path = 'AgoraEduSDK/AgoraEduSDK.modulemap'
+  # s.module_map = 'AgoraEduSDK/AgoraEduSDK.modulemap'
   s.static_framework = true
   s.frameworks = 'AudioToolbox', 'Foundation', 'UIKit'
 
@@ -61,4 +61,11 @@ TODO: Add long description of the pod here.
   s.dependency "AgoraUIBaseViews"
   s.dependency "AgoraExtApp"
   s.dependency "AgoraEduContext"
+  
+#  s.xcconfig = {
+#    'USER_HEADER_SEARCH_PATHS' => [
+#        '$(inherited)',
+#        '${PODS_CONFIGURATION_BUILD_DIR}/**'
+#    ]
+#  }
 end

@@ -21,4 +21,10 @@ Pod::Spec.new do |spec|
   spec.dependency "AgoraRtm_iOS", "1.4.1"
   spec.dependency "AgoraReport"
 
+#  spec.xcconfig = {
+#    'USER_HEADER_SEARCH_PATHS' => [
+#        '$(inherited)',
+#        '${PODS_CONFIGURATION_BUILD_DIR}/**'
+#    ]
+#  }
 end

@@ -64,6 +64,7 @@
 		78DB317D25FE21C5002A3D97 /* AgoraBaseViewController+Chat.h in Headers */ = {isa = PBXBuildFile; fileRef = 78DB317B25FE21C5002A3D97 /* AgoraBaseViewController+Chat.h */; };
 		78DB319D25FE2224002A3D97 /* AgoraBaseViewController+Room.h in Headers */ = {isa = PBXBuildFile; fileRef = 78DB319B25FE2224002A3D97 /* AgoraBaseViewController+Room.h */; };
 		78DB319E25FE2224002A3D97 /* AgoraBaseViewController+Room.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DB319C25FE2224002A3D97 /* AgoraBaseViewController+Room.m */; };
+		78DD50E42673A95A00885A61 /* AgoraEduSDK-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 78DD50E32673A95A00885A61 /* AgoraEduSDK-Bridging-Header.h */; };
 		78F0D8382600D92A005965AF /* AgoraModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F0D8372600D92A005965AF /* AgoraModels.swift */; };
 		78F0D8432600DA0E005965AF /* Agora1V1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F0D83F2600DA0E005965AF /* Agora1V1ViewController.m */; };
 		78F0D8452600DA0E005965AF /* Agora1V1ViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 78F0D8412600DA0E005965AF /* Agora1V1ViewController.h */; };
@@ -156,7 +157,7 @@
 		78DB317B25FE21C5002A3D97 /* AgoraBaseViewController+Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AgoraBaseViewController+Chat.h"; sourceTree = "<group>"; };
 		78DB319B25FE2224002A3D97 /* AgoraBaseViewController+Room.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AgoraBaseViewController+Room.h"; sourceTree = "<group>"; };
 		78DB319C25FE2224002A3D97 /* AgoraBaseViewController+Room.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AgoraBaseViewController+Room.m"; sourceTree = "<group>"; };
-		78E0FC7925C950E20023D161 /* AgoraEduSDK.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = AgoraEduSDK.modulemap; sourceTree = "<group>"; };
+		78DD50E32673A95A00885A61 /* AgoraEduSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AgoraEduSDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		78F0D8372600D92A005965AF /* AgoraModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgoraModels.swift; sourceTree = "<group>"; };
 		78F0D83F2600DA0E005965AF /* Agora1V1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Agora1V1ViewController.m; sourceTree = "<group>"; };
 		78F0D8412600DA0E005965AF /* Agora1V1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Agora1V1ViewController.h; sourceTree = "<group>"; };
@@ -254,7 +255,7 @@
 			children = (
 				78FEB4F92600DF1100C7CD9D /* AgoraEduSDK.pch */,
 				7874818325A884A30022329D /* Info.plist */,
-				78E0FC7925C950E20023D161 /* AgoraEduSDK.modulemap */,
+				78DD50E32673A95A00885A61 /* AgoraEduSDK-Bridging-Header.h */,
 				7874830E25AAB5BC0022329D /* Classes */,
 				86A3D28A260A18840066BA1E /* AgoraResources */,
 			);
@@ -488,6 +489,7 @@
 				7874841D25AAB5BD0022329D /* AgoraEduManager.h in Headers */,
 				7874841625AAB5BD0022329D /* AgoraHttpModel.h in Headers */,
 				7874841525AAB5BD0022329D /* AgoraHTTPManager.h in Headers */,
+				78DD50E42673A95A00885A61 /* AgoraEduSDK-Bridging-Header.h in Headers */,
 				7874841125AAB5BD0022329D /* AgoraSchduleModel.h in Headers */,
 				7874841025AAB5BD0022329D /* AgoraAssignGroupModel.h in Headers */,
 				7874841225AAB5BD0022329D /* AgoraRecordModel.h in Headers */,
@@ -852,12 +854,12 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = AgoraEduSDK/AgoraEduSDK.modulemap;
+				MODULEMAP_FILE = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.agora.AgoraEduSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "AgoraEduSDK/AgoraEduSDK-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -889,12 +891,12 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = AgoraEduSDK/AgoraEduSDK.modulemap;
+				MODULEMAP_FILE = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.agora.AgoraEduSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "AgoraEduSDK/AgoraEduSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

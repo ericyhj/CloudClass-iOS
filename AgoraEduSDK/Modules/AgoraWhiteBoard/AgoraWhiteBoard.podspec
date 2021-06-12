@@ -15,4 +15,10 @@ Pod::Spec.new do |spec|
   
   spec.dependency "Whiteboard", "2.12.22"
 
+#  spec.xcconfig = {
+#    'USER_HEADER_SEARCH_PATHS' => [
+#        '$(inherited)',
+#        '${PODS_CONFIGURATION_BUILD_DIR}/**'
+#    ]
+#  }
 end

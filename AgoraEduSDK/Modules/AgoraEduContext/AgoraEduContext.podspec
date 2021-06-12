@@ -39,4 +39,11 @@ TODO: Add long description of the pod here.
   s.dependency "AgoraExtApp"
 
   s.swift_versions = ['5.0', '5.1', '5.2', '5.3']
+  
+#  s.xcconfig = {
+#    'USER_HEADER_SEARCH_PATHS' => [
+#        '$(inherited)',
+#        '${PODS_CONFIGURATION_BUILD_DIR}/**'
+#    ]
+#  }
 end

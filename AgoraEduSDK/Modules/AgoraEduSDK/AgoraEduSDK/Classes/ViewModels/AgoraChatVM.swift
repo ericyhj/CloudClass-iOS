@@ -7,8 +7,6 @@
 
 import Foundation
 import AgoraUIEduBaseViews
-import AgoraEduSDK.AgoraFiles.AgoraHTTP
-import AgoraEduSDK.AgoraFiles.AgoraManager
 import AgoraEduContext
 
 @objcMembers public class AgoraChatVM: AgoraBaseVM {
