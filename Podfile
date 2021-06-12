@@ -23,10 +23,6 @@ def sourcePod
   pod 'AgoraActionProcess', :path => 'AgoraEduSDK/Modules/AgoraActionProcess/AgoraActionProcess.podspec', :subspecs => ['OC']
 end
 
-def binaryPod
-  pod 'AgoraEduSDK', :path => 'AgoraEduSDK/AgoraEduSDK.podspec'
-end
-
 workspace 'AgoraEducation.xcworkspace'
 install! 'cocoapods', :deterministic_uuids => false, :warn_for_unused_master_specs_repo => false
 
@@ -37,5 +33,5 @@ target 'AgoraEducation' do
   pod 'OpenSSL-Universal', '1.0.2.17'
   
   sourcePod
-  #binaryPod
+
 end

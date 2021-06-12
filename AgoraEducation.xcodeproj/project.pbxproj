@@ -19,7 +19,6 @@
 		688809E82629358800B5FB2A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688809E72629358800B5FB2A /* MainViewController.swift */; };
 		68A5E2AB2635143400E3C37E /* AboutTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5E2AA2635143400E3C37E /* AboutTableCell.swift */; };
 		68A5E2F12635557B00E3C37E /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5E2F02635557B00E3C37E /* AboutView.swift */; };
-		75D36FB810CB94F4AEF8D9A2 /* Pods_AgoraEducation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76A4F1D25B13050F999DB322 /* Pods_AgoraEducation.framework */; };
 		7801A89C25DB7D9D00C63ABF /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7801A89A25DB7D9D00C63ABF /* DebugViewController.swift */; };
 		7801A89D25DB7D9D00C63ABF /* DebugViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7801A89B25DB7D9D00C63ABF /* DebugViewController.xib */; };
 		7813B70223FA5A0300265830 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7813B6F623FA5A0300265830 /* LaunchScreen.storyboard */; };
@@ -38,6 +37,7 @@
 		78DFB69925AEE20B00B01906 /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78DFB68B25AEE20B00B01906 /* md5.cpp */; };
 		8654871F261EE6C70025ADCB /* WhiteBoardExtApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8654871E261EE6C70025ADCB /* WhiteBoardExtApp.m */; };
 		86F80252262589AF00364FFE /* CountDownExtApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F80251262589AF00364FFE /* CountDownExtApp.m */; };
+		C13307DD098BFC58431619D2 /* libPods-AgoraEducation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A158B4A4240003738D8FCB11 /* libPods-AgoraEducation.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,7 +84,6 @@
 		688809E72629358800B5FB2A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		68A5E2AA2635143400E3C37E /* AboutTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableCell.swift; sourceTree = "<group>"; };
 		68A5E2F02635557B00E3C37E /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		76A4F1D25B13050F999DB322 /* Pods_AgoraEducation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AgoraEducation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7801A89A25DB7D9D00C63ABF /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		7801A89B25DB7D9D00C63ABF /* DebugViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DebugViewController.xib; sourceTree = "<group>"; };
 		78136271242C81ED00B7D1FE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -137,6 +136,7 @@
 		86F80250262589AF00364FFE /* CountDownExtApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountDownExtApp.h; sourceTree = "<group>"; };
 		86F80251262589AF00364FFE /* CountDownExtApp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountDownExtApp.m; sourceTree = "<group>"; };
 		8CD382F7BF039504C1D49C53 /* Pods-AgoraEducation.qatestrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AgoraEducation.qatestrelease.xcconfig"; path = "Target Support Files/Pods-AgoraEducation/Pods-AgoraEducation.qatestrelease.xcconfig"; sourceTree = "<group>"; };
+		A158B4A4240003738D8FCB11 /* libPods-AgoraEducation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AgoraEducation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5BFF93D50503E0756F47D98 /* Pods-AgoraEducation.qarelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AgoraEducation.qarelease.xcconfig"; path = "Target Support Files/Pods-AgoraEducation/Pods-AgoraEducation.qarelease.xcconfig"; sourceTree = "<group>"; };
 		D58F6327530BE8AC6BB7A5A6 /* Pods-AgoraEducation.qatestnewrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AgoraEducation.qatestnewrelease.xcconfig"; path = "Target Support Files/Pods-AgoraEducation/Pods-AgoraEducation.qatestnewrelease.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,8 +146,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75D36FB810CB94F4AEF8D9A2 /* Pods_AgoraEducation.framework in Frameworks */,
 				787A004225D10FC10063456F /* AudioToolbox.framework in Frameworks */,
+				C13307DD098BFC58431619D2 /* libPods-AgoraEducation.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,7 +446,7 @@
 				1AE0D0A422897EC40092AC5E /* libresolv.tbd */,
 				1AE0D0A222897EA60092AC5E /* CoreTelephony.framework */,
 				1AE0D0A022897E9A0092AC5E /* SystemConfiguration.framework */,
-				76A4F1D25B13050F999DB322 /* Pods_AgoraEducation.framework */,
+				A158B4A4240003738D8FCB11 /* libPods-AgoraEducation.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -913,6 +913,14 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = (
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraExtApp/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraLog/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**",
+				);
 			};
 			name = Debug;
 		};
@@ -972,6 +980,14 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "AgoraEducation/Supporting Files/AgoraEducation-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = (
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraExtApp/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraLog/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**",
+				);
 			};
 			name = Release;
 		};
@@ -1159,6 +1175,14 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "AgoraEducation/Supporting Files/AgoraEducation-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = (
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraExtApp/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraLog/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**",
+				);
 			};
 			name = DevRelease;
 		};
@@ -1309,6 +1333,14 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "AgoraEducation/Supporting Files/AgoraEducation-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = (
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraExtApp/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraLog/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**",
+				);
 			};
 			name = QATestNewRelease;
 		};
@@ -1459,6 +1491,14 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "AgoraEducation/Supporting Files/AgoraEducation-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = (
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraExtApp/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraLog/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**",
+				);
 			};
 			name = QARelease;
 		};
@@ -1609,6 +1649,14 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "AgoraEducation/Supporting Files/AgoraEducation-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = (
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraExtApp/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraLog/**",
+					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**",
+				);
 			};
 			name = QATestRelease;
 		};

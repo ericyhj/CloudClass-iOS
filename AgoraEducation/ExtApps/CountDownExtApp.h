@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AgoraExtApp/AgoraExtApp.h>
+#import <AgoraExtApp/AgoraBaseExtApp.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

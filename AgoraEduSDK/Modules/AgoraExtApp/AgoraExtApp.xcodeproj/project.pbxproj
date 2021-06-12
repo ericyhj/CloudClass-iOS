@@ -15,7 +15,6 @@
 		86193A572635753C008A11D4 /* AgoraExtAppInternalObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86193A562635753C008A11D4 /* AgoraExtAppInternalObjects.swift */; };
 		86548747261EF2CC0025ADCB /* AgoraBaseExtApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 86548745261EF2CC0025ADCB /* AgoraBaseExtApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86548748261EF2CC0025ADCB /* AgoraBaseExtApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 86548746261EF2CC0025ADCB /* AgoraBaseExtApp.m */; };
-		86B5B3D3261D923A00EB06D1 /* AgoraExtApp.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B5B3D1261D923A00EB06D1 /* AgoraExtApp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +28,6 @@
 		86548745261EF2CC0025ADCB /* AgoraBaseExtApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraBaseExtApp.h; sourceTree = "<group>"; };
 		86548746261EF2CC0025ADCB /* AgoraBaseExtApp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgoraBaseExtApp.m; sourceTree = "<group>"; };
 		86B5B3CE261D923A00EB06D1 /* AgoraExtApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AgoraExtApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		86B5B3D1261D923A00EB06D1 /* AgoraExtApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraExtApp.h; sourceTree = "<group>"; };
 		86B5B3D2261D923A00EB06D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A89C7D524D88B5488DB2DCCE /* Pods-AgoraExtApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AgoraExtApp.release.xcconfig"; path = "Target Support Files/Pods-AgoraExtApp/Pods-AgoraExtApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,7 +73,6 @@
 		86B5B3D0261D923A00EB06D1 /* AgoraExtApp */ = {
 			isa = PBXGroup;
 			children = (
-				86B5B3D1261D923A00EB06D1 /* AgoraExtApp.h */,
 				86B5B3D2261D923A00EB06D1 /* Info.plist */,
 				86548745261EF2CC0025ADCB /* AgoraBaseExtApp.h */,
 				86548746261EF2CC0025ADCB /* AgoraBaseExtApp.m */,
@@ -106,7 +103,6 @@
 			files = (
 				86548747261EF2CC0025ADCB /* AgoraBaseExtApp.h in Headers */,
 				86193A532635742A008A11D4 /* AgoraExtAppObjects.h in Headers */,
-				86B5B3D3261D923A00EB06D1 /* AgoraExtApp.h in Headers */,
 				86193A4E263573C1008A11D4 /* AgoraExtAppController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

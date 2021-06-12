@@ -16,10 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)share;
 
 @property (nonatomic, strong, nullable) AgoraEduClassroom *classroom;
-//@property (nonatomic, strong, nullable) AgoraEduReplay *replay;
 @property (nonatomic, assign) float differTime;
 @property (nonatomic, weak, nullable) id<AgoraEduClassroomDelegate> classroomDelegate;
-//@property (nonatomic, weak, nullable) id<AgoraEduReplayDelegate> replayDelegate;
 
 @property (nonatomic, assign) BOOL sdkReady;
 @property (nonatomic, copy) NSString *token;

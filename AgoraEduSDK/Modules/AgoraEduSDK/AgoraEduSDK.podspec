@@ -64,8 +64,11 @@ TODO: Add long description of the pod here.
   
   s.xcconfig = {
     'USER_HEADER_SEARCH_PATHS' => [
-        '$(inherited)',
-        '${PODS_CONFIGURATION_BUILD_DIR}/**'
+        '${PODS_CONFIGURATION_BUILD_DIR}/AgoraEduContext/**',
+        '${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**',
+        '${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIEduBaseViews/**',
+        '${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIEduAppViews/**',
+        '${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**',
     ]
   }
 end

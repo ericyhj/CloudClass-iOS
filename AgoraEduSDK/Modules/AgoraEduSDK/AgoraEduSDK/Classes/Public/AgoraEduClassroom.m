@@ -7,7 +7,6 @@
 
 #import "AgoraUIEduBaseViews-Swift.h"
 #import "AgoraEduClassroom.h"
-#import "AgoraEduReplay.h"
 #import "AgoraEduTopVC.h"
 #import "AgoraBaseViewController.h"
 #import "AgoraEduManager.h"
@@ -15,7 +14,6 @@
 #import "AgoraManagerCache.h"
 
 @interface AgoraEduClassroom()
-@property (nonatomic, weak) AgoraEduReplay *replay;
 @end
 
 @implementation AgoraEduClassroom
@@ -28,20 +26,10 @@
         return;
     }
     
-    if (self.replay == nil) {
-        if (![AgoraEduTopVC.topVC isKindOfClass:AgoraBaseViewController.class]) {
-            // 页面上层还有其他页面，无法destory
-            [self showToast:AgoraLocalizedString(@"DismissVCText", nil)];
-            return;
-        }
-    } else {
-        Class class = Agora_Replay_Class;
-        if (class != nil) {
-            if (![AgoraEduTopVC.topVC isKindOfClass:class]) {
-                [self showToast:AgoraLocalizedString(@"DismissVCText", nil)];
-                return;
-            }
-        }
+    if (![AgoraEduTopVC.topVC isKindOfClass:AgoraBaseViewController.class]) {
+        // 页面上层还有其他页面，无法destory
+        [self showToast:AgoraLocalizedString(@"DismissVCText", nil)];
+        return;
     }
     
     [AgoraEduClassroom dismissVC:AgoraManagerCache.share.classroomDelegate classroom:AgoraManagerCache.share.classroom];

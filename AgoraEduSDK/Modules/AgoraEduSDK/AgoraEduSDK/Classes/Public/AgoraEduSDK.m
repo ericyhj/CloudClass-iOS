@@ -15,7 +15,6 @@
 #import "AgoraSmallViewController.h"
 #import "AgoraEduTopVC.h"
 #import "AgoraEyeCareModeUtil.h"
-#import "AgoraEduReplayConfiguration.h"
 #import "AgoraManagerCache.h"
 #import "AgoraHTTPManager.h"
 

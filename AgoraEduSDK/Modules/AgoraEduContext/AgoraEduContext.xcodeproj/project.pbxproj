@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		409D775881242698453EC1A6 /* Pods_AgoraEduContext.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E79F8A56FAE16C0C01C13A9A /* Pods_AgoraEduContext.framework */; };
-		783EF8A926299C38006082AC /* AgoraEduContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 783EF8A726299C38006082AC /* AgoraEduContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		783EF8B326299C5C006082AC /* AgoraEduContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783EF8B026299C5C006082AC /* AgoraEduContext.swift */; };
 		783EF8B426299C5C006082AC /* AgoraEduContextProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783EF8B126299C5C006082AC /* AgoraEduContextProtocols.swift */; };
 		783EF8B526299C5C006082AC /* AgoraEduContextObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783EF8B226299C5C006082AC /* AgoraEduContextObjects.swift */; };
@@ -16,7 +15,6 @@
 
 /* Begin PBXFileReference section */
 		783EF8A426299C38006082AC /* AgoraEduContext.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AgoraEduContext.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		783EF8A726299C38006082AC /* AgoraEduContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgoraEduContext.h; sourceTree = "<group>"; };
 		783EF8A826299C38006082AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		783EF8B026299C5C006082AC /* AgoraEduContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgoraEduContext.swift; sourceTree = "<group>"; };
 		783EF8B126299C5C006082AC /* AgoraEduContextProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgoraEduContextProtocols.swift; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 		783EF8A626299C38006082AC /* AgoraEduContext */ = {
 			isa = PBXGroup;
 			children = (
-				783EF8A726299C38006082AC /* AgoraEduContext.h */,
 				783EF8B026299C5C006082AC /* AgoraEduContext.swift */,
 				783EF8B226299C5C006082AC /* AgoraEduContextObjects.swift */,
 				783EF8B126299C5C006082AC /* AgoraEduContextProtocols.swift */,
@@ -74,7 +71,6 @@
 				912A41DB5988F1A319B619C3 /* Pods-AgoraEduContext.debug.xcconfig */,
 				BD7E95B09FB13B55F9ECB563 /* Pods-AgoraEduContext.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -93,7 +89,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				783EF8A926299C38006082AC /* AgoraEduContext.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +339,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -372,6 +368,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
