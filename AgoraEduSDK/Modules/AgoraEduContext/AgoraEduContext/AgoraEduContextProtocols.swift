@@ -191,6 +191,8 @@ import UIKit
 }
 
 @objc public protocol AgoraEduUserContext: NSObjectProtocol {
+    // 切换摄像头
+    func switchCamera()
     // mute本地视频
     func muteVideo(_ mute: Bool)
     // mute本地音频

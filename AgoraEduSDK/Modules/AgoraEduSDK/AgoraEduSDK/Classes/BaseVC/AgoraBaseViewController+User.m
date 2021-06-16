@@ -36,6 +36,11 @@
 }
 
 #pragma mark AgoraEduUserContext
+// 切换摄像头
+- (void)switchCamera {
+    [AgoraEduManager.shareManager.studentService switchCamera];
+}
+
 - (void)muteVideo:(BOOL)mute {
     AgoraWEAK(self);
     [self.userVM updateLocalVideoStream:mute
