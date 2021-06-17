@@ -1325,6 +1325,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
+					"GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1534,6 +1535,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
+					"GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1706,6 +1708,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
+					"GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1878,6 +1881,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
+					"GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2050,6 +2054,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
+					"GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
