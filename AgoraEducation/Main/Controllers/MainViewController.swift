@@ -29,10 +29,11 @@ import AgoraUIEduBaseViews
     }
     
     public override func viewDidLoad() {
+        super.viewDidLoad()
+        
         let eyeCare = UserDefaults.standard.bool(forKey: LoginConfig.USER_DEFAULT_EYE_CARE)
         let defaultConfig = AgoraEduSDKConfig.init(appId: KeyCenter.appId(), eyeCare: eyeCare)
-        AgoraEduSDK.setConfig(defaultConfig)
-
+        AgoraClassroomSDK.setConfig(defaultConfig)
     }
     
     required init?(coder aDecoder: NSCoder) {

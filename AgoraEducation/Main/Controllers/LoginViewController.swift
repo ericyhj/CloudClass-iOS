@@ -115,12 +115,6 @@ import AgoraEduSDK
         regionTypeView.isHidden = true
         return regionTypeView
     }()
-    
-    private lazy var aboutView: AboutView = {
-        var about = AboutView(frame: .zero)
-        about.alpha = 0
-        return about
-    }()
 
     private lazy var enterBtn: AgoraBaseUIButton = {
         var enterBtn = AgoraBaseUIButton()
@@ -208,7 +202,7 @@ extension LoginViewController {
     
         let eyeCare = UserDefaults.standard.bool(forKey: LoginConfig.USER_DEFAULT_EYE_CARE)
         let defaultConfig = AgoraEduSDKConfig.init(appId: KeyCenter.appId(), eyeCare: eyeCare)
-        AgoraEduSDK.setConfig(defaultConfig)
+        AgoraClassroomSDK.setConfig(defaultConfig)
     }
 }
 
@@ -381,7 +375,6 @@ extension LoginViewController {
         
         view.addSubview(enterBtn)
         view.addSubview(bottomLabel)
-        view.addSubview(aboutView)
     }
     
     fileprivate func initLayout() {
@@ -475,49 +468,6 @@ extension LoginViewController{
     }
     
     @objc private func onTouchAbout() {
-        view.addSubview(aboutView)
-        aboutView.agora_x = 0
-        aboutView.agora_y = 0
-        aboutView.agora_right = 0
-        aboutView.agora_bottom = 0
-        switch LoginConfig.device {
-        case .iPhone:    
-            aboutView.alpha = 1
-            aboutView.layoutIfNeeded()
-            aboutView.transform = CGAffineTransform(translationX: view.frame.width,
-                                                    y: 0)
-            UIView.animate(withDuration: TimeInterval.agora_animation,
-                           delay: 0,
-                           options: .transitionFlipFromLeft,
-                           animations: { [weak self] in
-                            self?.aboutView.agora_x = 0
-                            self?.aboutView.agora_y = 0
-                            self?.aboutView.agora_right = 0
-                            self?.aboutView.agora_bottom = 0
-
-                            self?.aboutView.transform = CGAffineTransform(translationX: 0,
-                                                                          y: 0)
-                            self?.aboutView.layoutIfNeeded()
-                           }, completion: nil)
-        case .iPad:
-            aboutView.alpha = 0
-            aboutView.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
-            UIView.animate(withDuration: TimeInterval.agora_animation,
-                           delay: 0,
-                           usingSpringWithDamping: 0.5,
-                           initialSpringVelocity: 0,
-                           options: .curveEaseInOut,
-                           animations: { [weak self] in
-                            self?.aboutView.agora_x = 0
-                            self?.aboutView.agora_y = 0
-                            self?.aboutView.agora_right = 0
-                            self?.aboutView.agora_bottom = 0
-                            self?.aboutView.alpha = 1
-                            self?.aboutView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                            
-                            self?.aboutView.layoutIfNeeded()
-                           }, completion: nil)
-        }
     }
     
     @objc private func onTouchShowClassTypes() {
@@ -559,9 +509,11 @@ extension LoginViewController{
                                           roomUuid: roomUuid,
                                           roomType: type,
                                           token: rtmToken,
-                                          startTime: startTime,
-                                          duration: duration,
-                                          boardRegion: region)
+                                          startTime:startTime,
+                                           duration:duration,
+                                        boardRegion:region,
+                                           userProperties:[:])
+                                          
         
         if alertView == nil {
             alertView = AgoraUtils.showLoading(message: "")
@@ -569,7 +521,7 @@ extension LoginViewController{
             alertView?.show(in: self.view)
         }
         
-        AgoraEduSDK.launch(config, delegate: self)
+        AgoraClassroomSDK.launch(config, delegate: self)
     }
     
     @objc private func onPushDebugVC() {

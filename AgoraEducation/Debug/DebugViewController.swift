@@ -97,23 +97,23 @@ import AgoraUIBaseViews
                                                appCertificate: KeyCenter.appCertificate(),
                                                userUuid: userUuid)
         
-        let config = AgoraEduLaunchConfig(userName: userName,
-                                          userUuid: userUuid,
-                                          roleType: .student,
-                                          roomName: roomName,
-                                          roomUuid: roomUuid,
-                                          roomType: type,
-                                          token: rtmToken,
-                                          startTime: __startTime,
-                                          duration: __duration,
-                                          boardRegion: nil)
-
-        if alertView == nil {
-            alertView = AgoraUtils.showLoading(message: "")
-        }
-        
-        AgoraEduSDK.launch(config,
-                           delegate: self)
+//        let config = AgoraEduLaunchConfig(userName: userName,
+//                                          userUuid: userUuid,
+//                                          roleType: .student,
+//                                          roomName: roomName,
+//                                          roomUuid: roomUuid,
+//                                          roomType: type,
+//                                          token: rtmToken,
+//                                          startTime: __startTime,
+//                                          duration: __duration,
+//                                          boardRegion
+//
+//        if alertView == nil {
+//            alertView = AgoraUtils.showLoading(message: "")
+//        }
+//
+//        AgoraEduSDK.launch(config,
+//                           delegate: self)
         
 //        let countDown = AgoraExtAppConfiguration(appIdentifier: "io.agora.countdown",
 //                                              extAppClass: CountDownExtApp.self,
@@ -152,8 +152,8 @@ import AgoraUIBaseViews
             self?.downURL = downURL
             self?.updateListLabel.text = "更新完成"
             
-            let courseware = AgoraEduCourseware(resourceName: resourceName, scenePath: scenePath, scenes: scenes, resourceUrl: downURL)
-            AgoraEduSDK.configCoursewares([courseware])
+//            let courseware = AgoraEduCourseware(resourceName: resourceName, scenePath: scenePath, scenes: scenes, resourceUrl: downURL)
+//            AgoraEduSDK.configCoursewares([courseware])
 
         } failure: {[weak self] (error) in
             self?.updateListLabel.text = "更新失败"
@@ -163,7 +163,7 @@ import AgoraUIBaseViews
         
         self.downLabel.text = "下载中"
     
-        AgoraEduSDK.downloadCoursewares(self)
+//        AgoraEduSDK.downloadCoursewares(self)
     }
     @IBAction func clearWareList(_ sender: Any) {
         

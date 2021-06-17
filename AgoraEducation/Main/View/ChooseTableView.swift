@@ -10,7 +10,7 @@ import Foundation
 import AgoraUIBaseViews
 import AgoraEduSDK
 
-public class ChooseTableView: AgoraBaseUIView {
+public class ChooseTableView: AgoraBaseUIView, UITableViewDataSource, UITableViewDelegate {
     private var cellId: String = ""
     private var dataList: Array<String> = []
     
@@ -78,9 +78,7 @@ public class ChooseTableView: AgoraBaseUIView {
         tableView.agora_bottom = 11
         tableView.agora_width = 280
     }
-}
 
-extension ChooseTableView: UITableViewDataSource {
     public func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -124,9 +122,6 @@ extension ChooseTableView: UITableViewDataSource {
         return LoginConfig.login_choose_cell_height
     }
     
-}
-
-extension ChooseTableView: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectTypeBlock(indexPath.row)
     }

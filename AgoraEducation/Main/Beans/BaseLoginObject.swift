@@ -65,19 +65,11 @@ class LoginConfig {
                                                                (AgoraEduRoomType.typeSmall, NSLocalizedString("Login_small", comment: "")),
                                                                (AgoraEduRoomType.typeLecture, NSLocalizedString("Login_lecture", comment: ""))]
     
-    static let AboutInfoList: Array<(String,Any?)> =
-        [(NSLocalizedString("About_privacy", comment: ""), URL(string: NSLocalizedString("Privacy_url", comment: ""))),
-         (NSLocalizedString("About_disclaimer", comment: ""),  DisclaimerView(frame: .zero)),
-         (NSLocalizedString("About_register", comment: ""), URL(string: NSLocalizedString("Signup_url", comment: ""))),
-         (NSLocalizedString("About_version_time", comment: ""),  version_time),
-         (NSLocalizedString("About_sdk_version", comment: ""),  sdk_version),
-         (NSLocalizedString("About_class_version", comment: ""), class_version)]
-    
     static let version_time: String = KeyCenter.publishDate()
     static let RegionList: Array<String> = Region_Type.allTypes()
     
     static let sdk_version: String = KeyCenter.rtcVersion()
-    static let class_version: String = "Ver \(AgoraEduSDK.version())"
+    static let class_version: String = "Ver \(AgoraClassroomSDK.version())"
     
     static let device: Device_type = Device_type.init(rawValue: UIDevice.current.model) ?? .iPhone
     
