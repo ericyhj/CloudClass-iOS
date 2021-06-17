@@ -1,5 +1,5 @@
 1. 下载aPaaS SDK, 我们提供了Swift版本下载链接：
- [5.4下载链接](https://github.com/AgoraIO-Community/CloudClass-iOS/releases/download/v1.1.2.1/AgoraClassroomSpecialSDK-1.1.2-5.4)
+ [5.4下载链接](https://github.com/AgoraIO-Community/CloudClass-iOS/releases/download/1.1.2.1/AgoraClassroomSpecialSDK-1.1.2-5.4.zip)
 > 可以在Terminal里面输入Swift -version，查看当前Swift版本。
 
 2. [下载aPaaS依赖库SDK](https://github.com/AgoraIO-Community/CloudClass-iOS/releases/download/v1.1.2.1/ThirdPartSpecial-1.1.2.zip)：
