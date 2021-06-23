@@ -29,10 +29,9 @@ Pod::Spec.new do |spec|
 
   spec.dependency "AFNetworking"
   
-#  spec.xcconfig = {
-#    'USER_HEADER_SEARCH_PATHS' => [
-#        '$(inherited)',
-#        '${PODS_CONFIGURATION_BUILD_DIR}/**'
-#    ]
-#  }
+  spec.script_phase = {
+    :name => 'Copy SwiftInterface.h',
+    :script => 'rm -rf ${SRCROOT}/../Swift/${PRODUCT_MODULE_NAME}-Swift.h && cp ${DERIVED_SOURCES_DIR}/*-Swift.h ${SRCROOT}/../Swift/'
+  }
+  
 end

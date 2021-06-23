@@ -63,12 +63,14 @@ TODO: Add long description of the pod here.
   s.dependency "AgoraEduContext"
   
   s.xcconfig = {
-    'USER_HEADER_SEARCH_PATHS' => [
-        '${PODS_CONFIGURATION_BUILD_DIR}/AgoraEduContext/**',
-        '${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**',
-        '${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIEduBaseViews/**',
-        '${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIEduAppViews/**',
-        '${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**',
-    ]
+   'USER_HEADER_SEARCH_PATHS' => [
+     '$(SRCROOT)/../Swift/**'
+   ]
   }
+  
+  s.script_phase = {
+    :name => 'Copy SwiftInterface.h',
+    :script => 'rm -rf ${SRCROOT}/../Swift/${PRODUCT_MODULE_NAME}-Swift.h && cp ${DERIVED_SOURCES_DIR}/*-Swift.h ${SRCROOT}/../Swift/'
+  }
+
 end

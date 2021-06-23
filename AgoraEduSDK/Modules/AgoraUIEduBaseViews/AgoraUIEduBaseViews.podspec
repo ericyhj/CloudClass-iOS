@@ -55,11 +55,15 @@ Pod::Spec.new do |spec|
   spec.swift_versions = ['5.0', '5.1', '5.2', '5.3', '5.4']
   spec.default_subspec = 'BINARY'
 
-#  spec.xcconfig = {
-#    'USER_HEADER_SEARCH_PATHS' => [
-#        '$(inherited)',
-#        '${PODS_CONFIGURATION_BUILD_DIR}/**'
-#    ]
-#  }
+  spec.xcconfig = {
+   'USER_HEADER_SEARCH_PATHS' => [
+     '$(SRCROOT)/../Swift/**'
+   ]
+  }
+  
+  spec.script_phase = {
+    :name => 'Copy SwiftInterface',
+    :script => 'rm -rf ${SRCROOT}/../Swift/${PRODUCT_MODULE_NAME}-Swift.h && cp ${DERIVED_SOURCES_DIR}/*-Swift.h ${SRCROOT}/../Swift/'
+  }
   
 end

@@ -76,3 +76,5 @@ Frameworks/
 derived_data/
 *.log
 *Podfile.lock
+
+Swift/*-Swift.h

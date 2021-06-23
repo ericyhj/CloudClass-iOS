@@ -41,10 +41,14 @@ TODO: Add long description of the pod here.
   s.swift_versions = ['5.0', '5.1', '5.2', '5.3']
   
   s.xcconfig = {
-    'USER_HEADER_SEARCH_PATHS' => [
-      '${PODS_CONFIGURATION_BUILD_DIR}/AgoraExtApp/**',
-      '${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**'
-    ]
+   'USER_HEADER_SEARCH_PATHS' => [
+     '$(SRCROOT)/../Swift/**'
+   ]
+  }
+  
+  s.script_phase = {
+    :name => 'Copy SwiftInterface.h',
+    :script => 'rm -rf ${SRCROOT}/../Swift/${PRODUCT_MODULE_NAME}-Swift.h && cp ${DERIVED_SOURCES_DIR}/*-Swift.h ${SRCROOT}/../Swift/'
   }
   
 end

@@ -14,5 +14,10 @@ Pod::Spec.new do |spec|
   spec.public_header_files = "AgoraUIBaseViews/*.h"
   spec.module_name   = 'AgoraUIBaseViews'
   spec.swift_versions = ['5.0', '5.1', '5.2', '5.3']
+
+  spec.script_phase = {
+    :name => 'Copy SwiftInterface',
+    :script => 'mkdir -p ${SRCROOT}/../Swift/ && rm -rf ${SRCROOT}/../Swift/${PRODUCT_MODULE_NAME}-Swift.h && cp ${DERIVED_SOURCES_DIR}/*-Swift.h ${SRCROOT}/../Swift/'
+  }
   
 end

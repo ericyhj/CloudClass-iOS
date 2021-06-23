@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <AgoraEduSDK/AgoraEduSDK.h>
 #import "AgoraEduSDK-Swift.h"
-#import "AgoraEduContext-Swift.h"
-#import "AgoraUIBaseViews-Swift.h"
-#import "AgoraUIEduBaseViews-Swift.h"
-#import "AgoraUIEduAppViews-Swift.h"
 #import "AgoraEduManager.h"
 #import "AgoraManagerCache.h"
+@import AgoraEduContext.Swift;
+@import AgoraUIBaseViews.Swift;
+@import AgoraUIEduBaseViews.Swift;
+@import AgoraUIEduAppViews.Swift;
 
 NS_ASSUME_NONNULL_BEGIN
 

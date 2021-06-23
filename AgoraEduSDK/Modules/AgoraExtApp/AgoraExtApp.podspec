@@ -19,8 +19,13 @@ Pod::Spec.new do |spec|
 
   spec.xcconfig = {
    'USER_HEADER_SEARCH_PATHS' => [
-     '${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**'
+     '$(SRCROOT)/../Swift/**'
    ]
   }
 
+  spec.script_phase = {
+    :name => 'Copy SwiftInterface.h',
+    :script => 'rm -rf ${SRCROOT}/../Swift/${PRODUCT_MODULE_NAME}-Swift.h && cp ${DERIVED_SOURCES_DIR}/*-Swift.h ${SRCROOT}/../Swift/'
+  }
+  
 end

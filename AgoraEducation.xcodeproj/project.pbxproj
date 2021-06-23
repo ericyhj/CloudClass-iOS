@@ -914,12 +914,8 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = (
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraExtApp/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
 					"$(inherited)",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraLog/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**",
+					"$(SRCROOT)/../Swift/**",
 				);
 			};
 			name = Debug;
@@ -981,12 +977,8 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = (
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraExtApp/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
 					"$(inherited)",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraLog/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**",
+					"$(SRCROOT)/../Swift/**",
 				);
 			};
 			name = Release;
@@ -1176,12 +1168,8 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = (
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraExtApp/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
 					"$(inherited)",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraLog/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**",
+					"$(SRCROOT)/../Swift/**",
 				);
 			};
 			name = DevRelease;
@@ -1334,12 +1322,8 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = (
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraExtApp/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
 					"$(inherited)",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraLog/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**",
+					"$(SRCROOT)/../Swift/**",
 				);
 			};
 			name = QATestNewRelease;
@@ -1492,12 +1476,8 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = (
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraExtApp/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
 					"$(inherited)",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraLog/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**",
+					"$(SRCROOT)/../Swift/**",
 				);
 			};
 			name = QARelease;
@@ -1650,12 +1630,8 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = (
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraExtApp/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
 					"$(inherited)",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraUIBaseViews/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraLog/**",
-					"${PODS_CONFIGURATION_BUILD_DIR}/AgoraReport/**",
+					"$(SRCROOT)/../Swift/**",
 				);
 			};
 			name = QATestRelease;

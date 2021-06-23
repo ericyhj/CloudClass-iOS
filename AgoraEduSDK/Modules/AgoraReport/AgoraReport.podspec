@@ -16,4 +16,9 @@ Pod::Spec.new do |spec|
 
   # spec.pod_target_xcconfig = {"OTHER_SWIFT_FLAGS[config=Debug]" => "-D AGORADEBUG" }
 
+  spec.script_phase = {
+    :name => 'Copy SwiftInterface.h',
+    :script => 'rm -rf ${SRCROOT}/../Swift/${PRODUCT_MODULE_NAME}-Swift.h && cp ${DERIVED_SOURCES_DIR}/*-Swift.h ${SRCROOT}/../Swift/'
+  }
+  
 end
