@@ -503,10 +503,14 @@ extension AgoraUIChatView {
     public func resizeChatViewFrame() {
 
         chatView.layoutIfNeeded()
+
         chatTableView.frame = CGRect(x: 0,
                                      y: self.titleView.agora_height,
                                      width: self.chatView.frame.width,
                                      height: self.chatView.frame.height - self.titleView.agora_height)
+        if !isMin {
+            chatTableView.reloadData()
+        }
     }
 }
 
