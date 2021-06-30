@@ -93,7 +93,7 @@ static AgoraClassroomSDK *manager = nil;
 
     if (config.roomType != AgoraEduRoomType1V1 &&
         config.roomType != AgoraEduRoomTypeSmall &&
-        config.roleType != AgoraEduRoomTypeLecture) {
+        config.roomType != AgoraEduRoomTypeLecture) {
         NSString *msg = [NSString stringWithFormat:@"%@%@", @"roomType", AgoraLocalizedString(@"ParamErrorText", nil)];
         [AgoraClassroomSDK showToast:msg];
         [AgoraClassroomSDK launchCompleteEvent:AgoraEduEventFailed];
