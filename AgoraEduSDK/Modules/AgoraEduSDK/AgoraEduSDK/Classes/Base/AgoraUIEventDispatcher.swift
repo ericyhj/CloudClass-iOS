@@ -47,35 +47,39 @@ public enum AgoraUIEvent {
     public func register(object: NSObjectProtocol) {
         
         var event: AgoraUIEvent?
+        
         if let `object` = object as? AgoraEduWhiteBoardHandler {
             event = .whiteBoard(object: object)
-            
-        } else if let `object` = object as? AgoraEduWhiteBoardPageControlHandler {
-            event = .whiteBoardPageControl(object: object)
-            
-        } else if let `object` = object as? AgoraEduPrivateChatHandler {
-            event = .privateChat(object: object)
-            
-        } else if let `object` = object as? AgoraEduRoomHandler {
-            event = .room(object: object)
-            
-        } else if let `object` = object as? AgoraEduMessageHandler {
-            event = .message(object: object)
-            
-        } else if let `object` = object as? AgoraEduUserHandler {
-            event = .user(object: object)
-            
-        } else if let `object` = object as? AgoraEduHandsUpHandler {
-            event = .handsup(object: object)
-            
-        } else if let `object` = object as? AgoraEduScreenShareHandler {
-            event = .shareScreen(object: object)
-            
-        } else {
-            return
+            self.register(event: event!)
         }
-        
-        self.register(event: event!)
+        if let `object` = object as? AgoraEduWhiteBoardPageControlHandler {
+            event = .whiteBoardPageControl(object: object)
+            self.register(event: event!)
+        }
+        if let `object` = object as? AgoraEduPrivateChatHandler {
+            event = .privateChat(object: object)
+            self.register(event: event!)
+        }
+        if let `object` = object as? AgoraEduRoomHandler {
+            event = .room(object: object)
+            self.register(event: event!)
+        }
+        if let `object` = object as? AgoraEduMessageHandler {
+            event = .message(object: object)
+            self.register(event: event!)
+        }
+        if let `object` = object as? AgoraEduUserHandler {
+            event = .user(object: object)
+            self.register(event: event!)
+        }
+        if let `object` = object as? AgoraEduHandsUpHandler {
+            event = .handsup(object: object)
+            self.register(event: event!)
+        }
+        if let `object` = object as? AgoraEduScreenShareHandler {
+            event = .shareScreen(object: object)
+            self.register(event: event!)
+        }
     }
     
     public func register(event: AgoraUIEvent) {
@@ -104,8 +108,9 @@ public enum AgoraUIEvent {
         }
         
         let pointer = Unmanaged.passUnretained(tObject).toOpaque()
-        
-        observers.addPointer(pointer)
+        if !observers.contains(pointer) {
+            observers.addPointer(pointer)
+        }
     }
     
     func observerse(eventId: String) -> NSPointerArray? {
@@ -482,6 +487,21 @@ fileprivate extension NSPointerArray {
     func add(object: NSObject) {
         let pointer = Unmanaged.passUnretained(object).toOpaque()
         addPointer(pointer)
+    }
+    
+    func contains(_ pointer: UnsafeMutableRawPointer) -> Bool {
+        guard count > 0  else {
+            return false
+        }
+        
+        for index in 0...(count - 1) {
+            let value = self.pointer(at: index)
+            if pointer == value {
+                return true
+            }
+        }
+        
+        return false
     }
     
     func object<T: Any>(at index: Int,
