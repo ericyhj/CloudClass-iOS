@@ -28,8 +28,8 @@ public class AgoraUserRenderCell: AgoraBaseUICollectionCell {
             return
         }
         
-        if let superView = view.superview,
-           superview == contentView {
+        if let supView = view.superview,
+           supView == contentView {
             return
         }
         
