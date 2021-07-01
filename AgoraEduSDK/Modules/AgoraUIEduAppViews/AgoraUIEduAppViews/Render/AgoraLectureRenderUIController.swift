@@ -28,15 +28,23 @@ class AgoraLectureRenderUIController: AgoraRenderUIController {
                                          b: 252)
         
         canvas.addSubview(imgViewOnCanvas)
-        imgViewOnCanvas.agora_center_x = 0
-        imgViewOnCanvas.agora_center_y = 0
+        canvas.bringSubviewToFront(imgViewOnCanvas)
+        imgViewOnCanvas.agora_x = 0
+        imgViewOnCanvas.agora_y = 0
+        imgViewOnCanvas.agora_right = 0
+        imgViewOnCanvas.agora_bottom = 0
         imgViewOnCanvas.isHidden = true
         
         return canvas
     }()
     
+    
     private lazy var imgViewOnCanvas: AgoraBaseUIImageView = {
         let imgViewOnCanvas = AgoraBaseUIImageView(frame: .zero)
+        imgViewOnCanvas.contentMode = .center
+        imgViewOnCanvas.backgroundColor = UIColor(r: 249,
+                                                  g: 249,
+                                                  b: 252)
         setImg(imgViewOnCanvas,
                "large_offline")
         return imgViewOnCanvas
@@ -200,10 +208,9 @@ private extension AgoraLectureRenderUIController {
         }
 
         if largeRenderFlag {
-            teacherCameraCoverDispatch()
-            
             userContext?.renderView(largeCanvas,
                                     streamUuid: teacherInfo.streamUuid)
+            teacherCameraCoverDispatch()
         } else {
             
             userContext?.renderView(teacherSmallView.videoCanvas,
@@ -212,32 +219,34 @@ private extension AgoraLectureRenderUIController {
     }
 
     func teacherCameraCoverDispatch() {
-        guard let `teacherInfo` = teacherInfo else {
-            return
-        }
-        
-        if !teacherInfo.onLine {
+        guard let `teacherInfo` = teacherInfo,
+                teacherInfo.onLine else {
             imgViewOnCanvas.isHidden = false
             setImg(imgViewOnCanvas,
                    "large_offline")
             return
         }
-        
-        switch teacherInfo.cameraState {
-        case .available:
-            imgViewOnCanvas.isHidden = true
-        case .close:
+
+        switch (teacherInfo.cameraState,teacherInfo.enableVideo) {
+        case var (cameraState,enableVideo) where cameraState == .close:
             imgViewOnCanvas.isHidden = false
             setImg(imgViewOnCanvas,
                    "large_close")
-        case .notAvailable:
+        case var (cameraState,enableVideo) where cameraState == .notAvailable:
             imgViewOnCanvas.isHidden = false
             setImg(imgViewOnCanvas,
                    "large_unavailable")
+        case (.available,true):
+            imgViewOnCanvas.isHidden = true
+        case (.available,false):
+            imgViewOnCanvas.isHidden = false
+            setImg(imgViewOnCanvas,
+                   "large_disable")
+            largeCanvas.bringSubviewToFront(imgViewOnCanvas)
         default:
             imgViewOnCanvas.isHidden = false
             setImg(imgViewOnCanvas,
-                   "large_baddevice")
+                   "large_unavailable")
         }
     }
     
