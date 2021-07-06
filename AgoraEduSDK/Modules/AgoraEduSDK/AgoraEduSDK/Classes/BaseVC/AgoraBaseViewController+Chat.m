@@ -47,7 +47,7 @@
 - (void)fetchHistoryMessages:(NSInteger)startId count:(NSInteger)count {
     
     AgoraWEAK(self);
-    [self.chatVM fetchHistoryMessages:startId count:count sort:1 successBlock:^(NSArray<AgoraEduContextChatInfo *> *infos) {
+    [self.chatVM fetchHistoryMessages:startId count:count sort:0 successBlock:^(NSArray<AgoraEduContextChatInfo *> *infos) {
             
         [weakself.eventDispatcher onFetchHistoryMessagesResult:nil list:infos];
         

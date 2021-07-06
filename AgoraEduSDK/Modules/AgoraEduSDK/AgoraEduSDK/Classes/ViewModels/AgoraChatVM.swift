@@ -78,7 +78,7 @@ extension AgoraChatVM {
         chatConfig.message = message
         AgoraHTTPManager.roomChat(withConfig: chatConfig) {[weak self] (model) in
             kitChatInfo.sendState = .success
-            self?.msgsIdMapping[model.messageId] = kitChatInfo.id
+            self?.msgsIdMapping[model.data.messageId] = kitChatInfo.id
             successBlock(kitChatInfo)
         } failure: {[weak self] (error, code) in
             if let `self` = self {
@@ -127,7 +127,7 @@ extension AgoraChatVM {
                     }
                 }
                 self.chatInfos.insert(contentsOf: kitChatInfos.reversed(), at: 0)
-                successBlock(kitChatInfos)
+                successBlock(kitChatInfos.reversed())
             } else {
 //                failureBlock("network error")
             }
