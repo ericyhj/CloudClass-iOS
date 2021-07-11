@@ -22,6 +22,8 @@ protocol AgoraBoardVMDelegate: NSObjectProtocol {
     
     func didBoardPageChange(pageIndex: Int, pageCount: Int)
     func didSceneChange(urls: [URL])
+    
+    func didBoardDisConnectedUnexpected()
 }
 
 public class AgoraBoardVM: AgoraBaseVM {
@@ -66,6 +68,7 @@ public class AgoraBoardVM: AgoraBaseVM {
               boardToken: String,
               success: @escaping () -> Void,
               failure: @escaping (_ error: Error) -> Void) {
+        
         // Report
         let subEvent = "board-join"
         let httpApi = "join"
@@ -276,6 +279,10 @@ extension AgoraBoardVM: AgoraWhiteManagerDelegate {
         
         delegate?.didBoardPageChange(pageIndex: pageIndex,
                                      pageCount: pageCount)
+    }
+    
+    public func onWhiteBoardDisConnectedUnexpected() {
+        delegate?.didBoardDisConnectedUnexpected()
     }
 
     // 老师切换场景，根据课件

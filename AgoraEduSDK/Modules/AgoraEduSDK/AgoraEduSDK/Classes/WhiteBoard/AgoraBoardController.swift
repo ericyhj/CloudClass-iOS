@@ -283,6 +283,10 @@ extension AgoraBoardController: AgoraBoardVMDelegate {
                                      pageCount: pageCount)
     }
     
+    func didBoardDisConnectedUnexpected() {
+        self.join()
+    }
+    
     func didSceneChange(urls: [URL]) {
         guard let url = urls.first else {
             return
