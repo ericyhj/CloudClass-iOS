@@ -89,7 +89,7 @@ class AgoraChatPanelMessageCell: AgoraBaseUITableViewCell {
         initView()
         initLayout()
     }
-
+    
     func updateView(model: AgoraEduContextChatInfo) {
         self.infoModel = model
  
@@ -269,6 +269,35 @@ extension AgoraChatPanelMessageCell {
             failBtn.isHidden = true
             failLoading.isHidden = false
             failLoading.startAnimating()
+        }
+    }
+    
+    class CellHelper {
+        class func getCellHeight(model: AgoraEduContextChatInfo, cellWidth: CGFloat) -> CGFloat {
+            
+            let sizeGapX: CGFloat = 7
+            let sizeGapY: CGFloat = 4
+            // 14 = self.failView.agora_width
+            let maxWidth = cellWidth - sizeGapX * 2 - 14 - 8
+            let lineViewGap: CGFloat = 3
+            
+            // sourceMessage
+            let maxSourceWidth = maxWidth - sizeGapX * 2;
+            // messageSource
+            let label = AgoraBaseUILabel()
+            label.text = model.message
+            label.textColor = UIColor(rgb: 0x191919)
+            label.font = UIFont.systemFont(ofSize: 12)
+            label.numberOfLines = 0
+            label.lineBreakMode = .byCharWrapping
+            let sourceSize = label.sizeThatFits(CGSize(width: maxSourceWidth, height: CGFloat(MAXFLOAT)))
+            let height = sourceSize.height + 1
+            let y = sizeGapY
+            
+            // 4 = self.mineLabel.agora_y
+            // 18 = self.mineLabel.agora_height
+            let cellHeight = (4 * 2 + 18) + (y + height) + lineViewGap
+            return cellHeight
         }
     }
 }

@@ -57,7 +57,7 @@ class AgoraChatUIController: NSObject, AgoraUIController {
             chatView.showDefaultText = true
             
             // 已经在右边了
-            if containerView.agora_safe_right > 10 {
+            if containerView.agora_safe_right > 8 {
                 chatView.scaleTouchBlock?(false)
             } else {
                 chatView.isMin = true
@@ -71,11 +71,6 @@ class AgoraChatUIController: NSObject, AgoraUIController {
         
         if AgoraKitDeviceAssistant.OS.isPad {
             chatView.showDefaultText = true
-        }
-        
-        UIView.animate(withDuration: 0.25) {
-        } completion: { (_) in
-            self.chatView.resizeChatViewFrame()
         }
     }
 }
@@ -101,10 +96,13 @@ extension AgoraChatUIController {
             self.containerView.agora_width = isMin ? chatPanelViewMinWidth : chatPanelViewMaxWidth
             self.containerView.agora_height = isMin ? chatPanelViewMinHeight : chatPanelViewMaxHeight
             self.delegate?.chatController(self, didUpdateSize: isMin)
+            
+//            self.chatView.setChatTableAlpha(0)
             UIView.animate(withDuration: 0.35) {
+//                self.chatView.setChatTableAlpha(1)
                 self.containerView.superview?.layoutIfNeeded()
             } completion: { (_) in
-                self.chatView.resizeChatViewFrame()
+                self.chatView.reloadChatTable()
             }
         }
     }

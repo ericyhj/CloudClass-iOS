@@ -646,11 +646,11 @@ static AgoraRTCManager *manager = nil;
         }
     }
     [self.rtcStreamStates removeAllObjects];
+    [self.rtcChannelInfos removeAllObjects];
     [self.threadTimer stop];
+    self.rtcEngineKit = nil;
     
-    [self.rtcEngineKit stopPreview];
-    
-    [self initData];
+    [AgoraRtcEngineKit destroy];
 }
 
 -(void)dealloc {

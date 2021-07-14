@@ -10,6 +10,8 @@ import AgoraUIBaseViews
 
 @objcMembers public class AgoraUIChatView: AgoraBaseUIView {
     
+    private var initializeHistory: Bool = true
+    
     public var scaleTouchBlock: ((_ min: Bool) -> Void)?
     public weak var context: AgoraEduMessageContext? {
         didSet {
@@ -65,7 +67,7 @@ import AgoraUIBaseViews
     }
     fileprivate var chatModels: [AgoraEduContextChatInfo] = [] {
         didSet {
-            self.chatTableView.reloadData()
+//            self.reloadChatTable()
             self.defaultTableView.isHidden = !(chatModels.count == 0)
         }
     }
@@ -221,10 +223,10 @@ import AgoraUIBaseViews
         tableView.backgroundColor = UIColor.white
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 59
         tableView.estimatedSectionHeaderHeight = 0
         tableView.estimatedSectionFooterHeight = 0
         tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 7, right: 0)
         tableView.register(AgoraChatPanelMessageCell.self, forCellReuseIdentifier: MessageCellID)
                         
         tableView.agora_header = AgoraRefreshNormalHeader(refreshingBlock: {[weak self] in
@@ -232,6 +234,7 @@ import AgoraUIBaseViews
             guard let `self` = self else {
                 return
             }
+            self.initializeHistory = false
             self.context?.fetchHistoryMessages(self.chatModels.first?.id ?? 0, count: self.PerPageCount)
         })
         let header = tableView.agora_header as? AgoraRefreshNormalHeader
@@ -251,10 +254,10 @@ import AgoraUIBaseViews
         self.titleView.agora_height = 44
         
         view.addSubview(self.chatTableView)
-//        self.chatTableView.agora_x = 0
-//        self.chatTableView.agora_right = 0
-//        self.chatTableView.agora_y = self.titleView.agora_height
-//        self.chatTableView.agora_bottom = 0
+        self.chatTableView.agora_x = 0
+        self.chatTableView.agora_right = 0
+        self.chatTableView.agora_y = self.titleView.agora_height
+        self.chatTableView.agora_bottom = 0
 
         view.addSubview(self.defaultTableView)
         self.defaultTableView.agora_center_x = 0
@@ -361,6 +364,9 @@ extension AgoraUIChatView: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let chatModel = chatModels[indexPath.section]
+        if chatModel.cellHeight == 0 {
+            return AgoraChatPanelMessageCell.CellHelper.getCellHeight(model: chatModel, cellWidth: self.frame.width)
+        }
         return chatModel.cellHeight
     }
     
@@ -385,12 +391,12 @@ extension AgoraUIChatView {
             if (self.originalBottom == nil) {
                 self.originalBottom = max(self.agora_bottom, self.agora_safe_bottom)
             }
-            self.agora_safe_bottom = rect.size.height + 5
+            self.agora_bottom = rect.size.height + 5
         }
     }
     @objc fileprivate func keyboardWillHidden(_ notification: NSNotification) {
         if let bottom = self.originalBottom {
-            self.agora_safe_bottom = bottom
+            self.agora_bottom = bottom
         }
     }
 }
@@ -479,6 +485,8 @@ extension AgoraUIChatView {
             let gap: CGFloat = 8
             self.chatView.agora_bottom = self.sendView.agora_bottom + self.sendView.agora_height + gap
         }
+        
+        self.layoutIfNeeded()
     }
 }
 
@@ -500,17 +508,15 @@ extension AgoraUIChatView: UITextFieldDelegate {
 
 // MARK: Private
 extension AgoraUIChatView {
-    public func resizeChatViewFrame() {
-
-        chatView.layoutIfNeeded()
-
-        chatTableView.frame = CGRect(x: 0,
-                                     y: self.titleView.agora_height,
-                                     width: self.chatView.frame.width,
-                                     height: self.chatView.frame.height - self.titleView.agora_height)
-        if !isMin {
-            chatTableView.reloadData()
-        }
+    public func reloadChatTable() {
+//        chatTableView.isHidden = true
+//        chatTableView.reloadData()
+//        chatTableView.layoutIfNeeded()
+//        chatTableView.isHidden = true
+        self.scrollToBottom()
+    }
+    public func setChatTableAlpha(_ alpha: CGFloat) {
+        chatTableView.alpha = alpha
     }
 }
 
@@ -527,17 +533,40 @@ extension AgoraUIChatView {
         self.textField?.resignFirstResponder()
     }
     
-    fileprivate func scrollToBottom() {
-
-        if (self.chatModels.count <= 1) {
+    fileprivate func initializeHistoryInfos() {
+        if !initializeHistory {
             return
         }
         
-        let indexPath = IndexPath(row: 0, section: self.chatModels.count - 1)
-        self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        self.chatTableView.isHidden = true
+        self.chatTableView.reloadData()
+        if (self.chatModels.count > 1) {
+            let indexPath = IndexPath(row: 0, section: self.chatModels.count - 2)
             self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+            
+            self.chatTableView.isHidden = false
+            let lastIndexPath = IndexPath(row: 0, section: self.chatModels.count - 1)
+            self.chatTableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
         }
+        self.chatTableView.isHidden = false
+    }
+    
+    fileprivate func scrollToBottom() {
+        self.chatTableView.isHidden = true
+        if isMin {
+            return
+        }
+
+        self.chatTableView.reloadData()
+        if (self.chatModels.count > 1) {
+            let indexPath = IndexPath(row: 0, section: self.chatModels.count - 2)
+            self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+            
+            self.chatTableView.isHidden = false
+            let lastIndexPath = IndexPath(row: 0, section: self.chatModels.count - 1)
+            self.chatTableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+        }
+        self.chatTableView.isHidden = false
     }
     
     @objc fileprivate func onMinTouchEvent() {
@@ -586,7 +615,7 @@ extension AgoraUIChatView {
         }) {
             let indexPath = IndexPath(row: 0, section: index)
             self.chatModels[index] = messageInfo
-            self.chatTableView.reloadSections(IndexSet(indexPath), with: .automatic)
+            self.chatTableView.reloadSections(IndexSet(indexPath), with: .none)
         } else {
             self.chatModels.append(messageInfo)
             // 第一次接受到自己发送的数据，需要滚动下最下面
@@ -608,7 +637,13 @@ extension AgoraUIChatView {
         
         if let infos = list {
             self.chatModels.insert(contentsOf: infos, at: 0)
+            if initializeHistory {
+                self.initializeHistoryInfos()
+            } else {
+                self.chatTableView.reloadData()
+            }
         }
+        initializeHistory = false
     }
     
     public func onUpdateChatPermission(_ allow: Bool) {
