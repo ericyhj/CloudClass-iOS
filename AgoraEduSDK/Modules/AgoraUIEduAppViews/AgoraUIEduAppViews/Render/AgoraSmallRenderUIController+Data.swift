@@ -99,7 +99,8 @@ fileprivate extension Array where Element == AgoraRenderListItem {
         var temp = [AgoraRenderListItem]()
         
         for user in list {
-            guard user.coHost else {
+            guard user.coHost,
+                  user.onLine else {
                 continue
             }
             
