@@ -36,6 +36,9 @@ struct AgoraDeviceStreamState {
     // online & offline students
     public var kitCoHostInfos: [AgoraEduContextUserDetailInfo] = []
     
+    var hasAudio: Bool?
+    var hasVideo: Bool?
+    
     // 流状态 [streamUuid: AgoraRTEStreamState]
     fileprivate var rteStreamStates: [String: AgoraDeviceStreamState] = [:]
     // 白板状态
@@ -247,12 +250,24 @@ struct AgoraDeviceStreamState {
     public func getStreamInfo(streamUuid: String,
                               successBlock: @escaping (_ stream: AgoraRTEStream) -> Void,
                               failureBlock: @escaping (_ error: AgoraEduContextError) -> Void) {
-        AgoraEduManager.share().roomManager?.getFullStreamList(success: { (streamInfos) in
+        AgoraEduManager.share().roomManager?.getFullStreamList(success: {[weak self] (streamInfos) in
+            
+            guard let `self` = self,
+                  let localUser = self.localUserInfo else {
+                return
+            }
             
             if let stream = streamInfos.first(where: { (streamInfo) -> Bool in
                 streamInfo.streamUuid == streamUuid
             }) {
                 successBlock(stream)
+                return
+            }
+            
+            if streamUuid == localUser.streamUuid {
+                let stream = AgoraRTEStream(streamUuid: streamUuid, streamName: "", sourceType: .camera, hasVideo: true, hasAudio: true, user: localUser)
+                successBlock(stream)
+                return
             }
             
         }, failure: {[weak self] (error) in
@@ -375,13 +390,8 @@ struct AgoraDeviceStreamState {
                 return true
             }
             
-            self.kitCoHostInfos.forEach { (userDetailInfo) in
-                
-                if rteUsers.first(where: { (rteUser) -> Bool in
-                    return rteUser.userUuid == userDetailInfo.user.userUuid
-                }) != nil {
-                    userDetailInfo.onLine = false
-                }
+            self.kitCoHostInfos.removeAll { userDetailInfo in
+                return rteUsers.first{$0.userUuid == userDetailInfo.user.userUuid } != nil
             }
             successBlock()
             return
@@ -549,7 +559,6 @@ struct AgoraDeviceStreamState {
                                     successBlock: @escaping () -> Void,
                                     failureBlock: @escaping (_ error: AgoraEduContextError) -> Void) {
         guard let `cause` = cause as? Dictionary<String, Any>,
-              (cause["cmd"] as? Int ?? 0) == AgoraCauseType.device.rawValue,
               let _ = cause["data"] as? Dictionary<String, Any> else {
             successBlock()
             return
@@ -569,6 +578,14 @@ struct AgoraDeviceStreamState {
         kitUserInfo?.microState = microState
         kitCoHostInfo?.cameraState = cameraState
         kitCoHostInfo?.microState = microState
+        //1.0-禁言,其他不禁言
+        if let disableDit = cause["data"] as? Dictionary<String, Int> {
+            let disable = disableDit["muteChat"] ?? 0
+//            kitUserInfo?.disableSendMsg = disable
+//            kitCoHostInfo?.disableSendMsg = disable
+            //设置了单人禁言就以单人禁言来
+//            AgoraManagerCache.share().disableSendMsg = disable
+        }
         
         successBlock()
     }
@@ -589,6 +606,7 @@ extension AgoraUserVM {
         fhs.enableVideo = ths.enableVideo
         fhs.enableAudio = ths.enableAudio
         fhs.rewardCount = ths.rewardCount
+//        fhs.disableSendMsg = ths.disableSendMsg
     }
     
     fileprivate func updateCoHostInfos(onLineRteUsers: [AgoraRTEUser],
@@ -707,6 +725,10 @@ extension AgoraUserVM {
             if self.config.sceneType == .type1V1 ||  coHostUserUuids.contains(userUuid) {
                 kitUserInfo.coHost = true
             }
+            
+            if kitUserInfo.isSelf {
+//                kitUserInfo.disableSendMsg = AgoraManagerCache .share().disableSendMsg
+            }
 
             kitUserInfos.append(kitUserInfo)
         }
@@ -823,43 +845,55 @@ extension AgoraUserVM {
     }
     
     fileprivate func updateLocalStream(_ muteAudio: Bool?,
-                                       muteVideo: Bool?,
-                                       successBlock: @escaping (_ stream: AgoraRTEStream) -> Void,
-                                       failureBlock: @escaping (_ error: Error) -> Void) {
-        AgoraEduManager.share().roomManager?.getLocalUser(success: {[weak self] (localUser) in
-            
-            self?.localUserInfo = localUser
-            
-            var hasAudio = localUser.streams.first?.hasAudio ?? false
-            if let `muteAudio` = muteAudio {
-                hasAudio = !muteAudio
-            }
-            var hasVideo = localUser.streams.first?.hasVideo ?? false
-            if let muteVideo = muteVideo {
-                hasVideo = !muteVideo
-            }
-            
-            let config = AgoraRTEStreamConfig(streamUuid: localUser.streamUuid)
-            config.streamName = ""
-            config.enableCamera = hasVideo
-            config.enableMicrophone = hasAudio
-            AgoraEduManager.share().studentService?.startOrUpdateLocalStream(config, success: { (stream) in
+                                           muteVideo: Bool?,
+                                           successBlock: @escaping (_ stream: AgoraRTEStream) -> Void,
+                                           failureBlock: @escaping (_ error: Error) -> Void) {
+
+            AgoraEduManager.share().roomManager?.getLocalUser(success: {[weak self] (localUser) in
                 
-                AgoraEduManager.share().studentService?.publishStream(stream, success: {
+                guard let `self` = self else {
+                    return
+                }
+                
+                self.localUserInfo = localUser
+                
+                if self.hasAudio == nil {
+                    self.hasAudio = self.localUserInfo?.streams.first?.hasAudio ?? false
+                }
+                if self.hasVideo == nil {
+                    self.hasVideo = self.localUserInfo?.streams.first?.hasVideo ?? false
+                }
+                
+                //var hasAudio = localUser.streams.first?.hasAudio ?? false
+                if let `muteAudio` = muteAudio {
+                    self.hasAudio = !muteAudio
+                }
+                //var hasVideo = localUser.streams.first?.hasVideo ?? false
+                if let muteVideo = muteVideo {
+                    self.hasVideo = !muteVideo
+                }
+                
+                let config = AgoraRTEStreamConfig(streamUuid: localUser.streamUuid)
+                config.streamName = ""
+                config.enableCamera = self.hasVideo!
+                config.enableMicrophone = self.hasAudio!
+                AgoraEduManager.share().studentService?.startOrUpdateLocalStream(config, success: { (stream) in
                     
-                    successBlock(stream)
+                    AgoraEduManager.share().studentService?.publishStream(stream, success: {
+                        
+                        successBlock(stream)
+                
+                    }, failure: { (error) in
+                        failureBlock(error)
+                    })
                     
                 }, failure: { (error) in
                     failureBlock(error)
                 })
-                
             }, failure: { (error) in
                 failureBlock(error)
             })
-        }, failure: { (error) in
-            failureBlock(error)
-        })
-    }
+        }
 }
 
 // MARK: TipMessage

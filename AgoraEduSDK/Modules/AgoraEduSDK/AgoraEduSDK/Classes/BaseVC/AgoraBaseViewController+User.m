@@ -41,23 +41,25 @@
     [AgoraEduManager.shareManager.studentService switchCamera];
 }
 
-- (void)muteVideo:(BOOL)mute {
+- (void)muteVideo:(BOOL)mute successBlock:(void (^)(void))successBlock failureBlock: (void (^)(void))failureBlock {
     AgoraWEAK(self);
     [self.userVM updateLocalVideoStream:mute
                            successBlock:^(AgoraRTEStream *stream) {
-
+        successBlock();
     } failureBlock:^(AgoraEduContextError *error) {
         [weakself onShowErrorInfo:error];
+        failureBlock();
     }];
 }
 
-- (void)muteAudio:(BOOL)mute {
+- (void)muteAudio:(BOOL)mute successBlock:(void (^)(void))successBlock failureBlock: (void (^)(void))failureBlock {
     AgoraWEAK(self);
     [self.userVM updateLocalAudioStream:mute
                            successBlock:^(AgoraRTEStream *stream) {
-            
+        successBlock();
     } failureBlock:^(AgoraEduContextError *error) {
         [weakself onShowErrorInfo:error];
+        failureBlock();
     }];
 }
 

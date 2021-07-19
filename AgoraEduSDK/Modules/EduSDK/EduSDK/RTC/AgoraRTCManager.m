@@ -104,6 +104,9 @@ static AgoraRTCManager *manager = nil;
 
 - (int)joinChannelByToken:(NSString * _Nullable)token channelId:(NSString * _Nonnull)channelId info:(NSString * _Nullable)info uid:(NSUInteger)uid autoSubscribeAudio:(BOOL)autoSubscribeAudio autoSubscribeVideo:(BOOL)autoSubscribeVideo {
     
+    if (!self.frontCamera) {
+        [self switchCamera];
+    }
     [AgoraRTELogService logMessageWithDescribe:@"join channel:" message:@{@"roomUuid":AgoraRTCNoNullString(channelId), @"token":AgoraRTCNoNullString(token), @"uid":@(uid)}];
     
     AgoraRtcChannel *agoraRtcChannel = [self.rtcEngineKit createRtcChannel:channelId];
@@ -646,11 +649,11 @@ static AgoraRTCManager *manager = nil;
         }
     }
     [self.rtcStreamStates removeAllObjects];
-    [self.rtcChannelInfos removeAllObjects];
     [self.threadTimer stop];
-    self.rtcEngineKit = nil;
-    
-    [AgoraRtcEngineKit destroy];
+    [self.rtcEngineKit stopPreview];
+    BOOL cameraBackup = self.frontCamera;
+    [self initData];
+    self.frontCamera = cameraBackup;
 }
 
 -(void)dealloc {

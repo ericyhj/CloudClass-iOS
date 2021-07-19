@@ -194,9 +194,15 @@ import UIKit
     // 切换摄像头
     func switchCamera()
     // mute本地视频
-    func muteVideo(_ mute: Bool)
+    func muteAudio(_ mute: Bool,
+                   successBlock: @escaping () -> Void,
+                   failureBlock: @escaping () -> Void)
+    func muteVideo(_ mute: Bool,
+                   successBlock: @escaping () -> Void,
+                   failureBlock: @escaping () -> Void)
+//    func muteVideo(_ mute: Bool)
     // mute本地音频
-    func muteAudio(_ mute: Bool)
+//    func muteAudio(_ mute: Bool)
     // 渲染或者关闭渲染流，view为nil代表关闭流渲染
     func renderView(_ view: UIView?, streamUuid: String)
     // 事件监听

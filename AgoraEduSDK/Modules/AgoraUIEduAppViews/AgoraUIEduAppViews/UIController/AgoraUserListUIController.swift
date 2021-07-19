@@ -199,14 +199,24 @@ extension AgoraUserListUIController: AgoraUserCellDelegate {
                   didPresseVideoMuteAt index: Int) {
         let user = studentModels[index]
         let mute = user.enableVideo
-        userContext?.muteVideo(mute)
+        userContext?.muteVideo(mute,
+                               successBlock: {
+                                
+                               }, failureBlock: {
+                                
+                               })
     }
     
     func userCell(_ cell: AgoraUserCell,
                   didPresseAudioMuteAt index: Int) {
         let user = studentModels[index]
         let mute = user.enableAudio
-        userContext?.muteAudio(mute)
+        userContext?.muteAudio(mute,
+                               successBlock: {
+                                
+                               }, failureBlock: {
+                                
+                               })
     }
 }
 

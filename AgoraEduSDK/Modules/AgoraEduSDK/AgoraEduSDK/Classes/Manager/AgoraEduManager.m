@@ -106,6 +106,7 @@ static AgoraEduManager *manager = nil;
             
             AgoraManagerCache.share.roomStateInfoModel = model.data;
             AgoraManagerCache.share.userUuid = config.userUuid;
+//            AgoraManagerCache.share.userName = config.userName;
             AgoraManagerCache.share.roomUuid = config.roomUuid;
             NSDate *datenow = [NSDate date];
             NSTimeInterval interval = [datenow timeIntervalSince1970];
@@ -267,13 +268,15 @@ static AgoraEduManager *manager = nil;
 }
 
 + (void)releaseResource {
-    [AgoraEduManager.shareManager.eduManager destory];
-    AgoraEduManager.shareManager.eduManager = nil;
-    AgoraEduManager.shareManager.roomManager = nil;
-    AgoraEduManager.shareManager.logManager = nil;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [AgoraEduManager.shareManager.eduManager destory];
+        AgoraEduManager.shareManager.eduManager = nil;
+        AgoraEduManager.shareManager.roomManager = nil;
+        AgoraEduManager.shareManager.logManager = nil;
 
-    AgoraEduManager.shareManager.studentService = nil;
-    
-    [AgoraManagerCache releaseResource];
+        AgoraEduManager.shareManager.studentService = nil;
+        
+        [AgoraManagerCache releaseResource];
+    });
 }
 @end

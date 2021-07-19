@@ -27,6 +27,7 @@ extension AgoraSmallRenderUIController: AgoraEduUserHandler {
     
     // 自己被踢出
     public func onKickedOut() {
+//        AgoraUtils.hiddenAlert()
         let btnLabel = AgoraAlertLabelModel()
         btnLabel.text = AgoraKitLocalizedString("SureText")
         let btnModel = AgoraAlertButtonModel()

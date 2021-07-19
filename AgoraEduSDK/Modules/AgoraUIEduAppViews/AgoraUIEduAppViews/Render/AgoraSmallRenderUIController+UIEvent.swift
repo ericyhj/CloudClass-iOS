@@ -62,12 +62,6 @@ extension AgoraSmallRenderUIController: UICollectionViewDataSource {
 // MARK: - UIScrollViewDelegate, UICollectionViewDelegate
 extension AgoraSmallRenderUIController: UIScrollViewDelegate, UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let condition1 = scrollView.contentOffset.x > 0
-        let condition2 = scrollView.contentOffset.x + scrollView.frame.width < scrollView.contentSize.width
-        
-        let shouldShowLeftRightButton = condition1 && condition2
-        renderListView.leftButton.isHidden = !shouldShowLeftRightButton
-        renderListView.rightButton.isHidden = !shouldShowLeftRightButton
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -135,7 +129,6 @@ extension AgoraSmallRenderUIController: AgoraUIUserViewDelegate {
             
             button.isSelected.toggle()
             let isMuted = button.isSelected
-            userContext?.muteAudio(isMuted)
         default:
             let studentInfo = coHosts[index].userInfo
             guard studentInfo.isSelf else {
@@ -144,7 +137,6 @@ extension AgoraSmallRenderUIController: AgoraUIUserViewDelegate {
 
             button.isSelected.toggle()
             let isMuted = button.isSelected
-            userContext?.muteAudio(isMuted)
         }
     }
     
@@ -159,7 +151,6 @@ extension AgoraSmallRenderUIController: AgoraUIUserViewDelegate {
             }
             
             button.isSelected.toggle()
-            userContext?.muteVideo(button.isSelected)
         default:
             let studentInfo = coHosts[index].userInfo
             guard studentInfo.isSelf else {
@@ -167,7 +158,6 @@ extension AgoraSmallRenderUIController: AgoraUIUserViewDelegate {
             }
 
             button.isSelected.toggle()
-            userContext?.muteVideo(button.isSelected)
         }
     }
 }

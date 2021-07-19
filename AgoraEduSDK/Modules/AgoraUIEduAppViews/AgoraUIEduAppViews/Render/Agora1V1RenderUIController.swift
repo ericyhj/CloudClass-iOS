@@ -146,7 +146,13 @@ extension Agora1V1RenderUIController: AgoraUIUserViewDelegate {
             }
             
             button.isSelected.toggle()
-            userContext?.muteAudio(button.isSelected)
+            userContext?.muteAudio(button.isSelected,
+                                   successBlock: {
+                                    
+                                   }, failureBlock: {
+                                    
+                                   })
+//            userContext?.muteAudio(button.isSelected, su)
         case studentIndex:
             guard let info = studentInfo,
                   info.isSelf else {
@@ -154,7 +160,13 @@ extension Agora1V1RenderUIController: AgoraUIUserViewDelegate {
             }
             
             button.isSelected.toggle()
-            userContext?.muteAudio(button.isSelected)
+            userContext?.muteAudio(button.isSelected,
+                                   successBlock: {
+                                    
+                                   }, failureBlock: {
+                                    
+                                   })
+//            userContext?.muteAudio(button.isSelected)
         default:
             break
         }
@@ -171,7 +183,13 @@ extension Agora1V1RenderUIController: AgoraUIUserViewDelegate {
             }
             
             button.isSelected.toggle()
-            userContext?.muteVideo(button.isSelected)
+            userContext?.muteVideo(button.isSelected,
+                                   successBlock: {
+                                    
+                                   }, failureBlock: {
+                                    
+                                   })
+//            userContext?.muteVideo(button.isSelected)
         case studentIndex:
             guard let info = studentInfo,
                   info.isSelf else {
@@ -179,7 +197,13 @@ extension Agora1V1RenderUIController: AgoraUIUserViewDelegate {
             }
             
             button.isSelected.toggle()
-            userContext?.muteVideo(button.isSelected)
+            userContext?.muteVideo(button.isSelected,
+                                   successBlock: {
+                                    
+                                   }, failureBlock: {
+                                    
+                                   })
+//            userContext?.muteVideo(button.isSelected)
         default:
             break
         }
