@@ -146,21 +146,15 @@ extension AgoraRoomUIController: AgoraEduRoomHandler {
         switch state {
         case .aborted:
             // 踢出
-            loadingView?.removeFromSuperview()
+            AgoraUtils.dismissLoading()
             AgoraUtils.showToast(message: AgoraKitLocalizedString("LoginOnAnotherDeviceText"))
             context?.leaveRoom()
         case .connecting:
-            if loadingView?.superview == nil {
-                self.loadingView = AgoraUtils.showLoading(message: AgoraKitLocalizedString("LoaingText"))
-                
-                
-            }
+            AgoraUtils.showLoading(message: AgoraKitLocalizedString("LoaingText"))
         case .disconnected, .reconnecting:
-            if loadingView?.superview == nil {
-                self.loadingView = AgoraUtils.showLoading(message: AgoraKitLocalizedString("ReconnectingText"))
-            }
+             AgoraUtils.showLoading(message: AgoraKitLocalizedString("ReconnectingText"))
         case .connected:
-            loadingView?.removeFromSuperview()
+            AgoraUtils.dismissLoading()
         }
     }
     

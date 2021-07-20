@@ -25,6 +25,8 @@
 @implementation AgoraRoomStateModel
 @end
 
+@implementation AgoraChatInfoModel
+@end
 @implementation AgoraChatModel
 @end
 

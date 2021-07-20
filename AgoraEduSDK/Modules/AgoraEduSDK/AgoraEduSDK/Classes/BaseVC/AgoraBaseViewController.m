@@ -29,6 +29,7 @@
 @property (nonatomic, strong) AgoraEduWidgetController *componentsController;
 @property (nonatomic, strong) AgoraScreenShareController *screenShareController;
 @property (nonatomic, strong) AgoraDeviceController *deviceController;
+@property (nonatomic, strong) AgoraMediaController *mediaController;
 @property (nonatomic, strong) AgoraManagerCache *cache;
 @property (nonatomic, strong) AgoraDownloadManager *download;
 @property (nonatomic, strong) AgoraKeyGroup *keyGroup;
@@ -97,6 +98,8 @@
     self.contextPool.shareScreenIMP = self.screenShareController;
     self.contextPool.widgetIMP = self.componentsController;
     self.contextPool.deviceIMP = self.deviceController;
+    self.contextPool.mediaIMP = self.mediaController;
+
     self.eventDispatcher = [AgoraUIEventDispatcher new];
 }
 
@@ -127,39 +130,12 @@
     self.appsController.containerView.agora_safe_bottom = 0;
 }
 
-#pragma mark - Private Data
-- (void)initData {
-    AgoraWEAK(self);
+#pragma mark AgoraEduRoomContext
+// 加入房间
+- (void)joinClassroom {
+    __weak AgoraBaseViewController *weakself = self;
+    [self.roomVM joinClassroomWithSuccessBlock:^(AgoraRTELocalUser *localUser, uint64_t timestamp) {
 
-    self.keyGroup.agoraAppId = self.vmConfig.appId;
-    self.keyGroup.localUserUuid = self.vmConfig.userUuid;
-    self.keyGroup.rtmToken = self.vmConfig.token;
-
-    self.roomVM = [[AgoraRoomVM alloc] initWithConfig:self.vmConfig];
-    self.roomVM.classOverBlock = ^{
-        [weakself updateClassState];
-    };
-    self.roomVM.timerToastBlock = ^(NSString *message) {
-        if ([weakself respondsToSelector:@selector(onShowClassTips:)]) {
-            [weakself onShowClassTips:message];
-        }
-    };
-    self.roomVM.updateTimerBlock = ^(NSString *timerString) {
-        if ([weakself respondsToSelector:@selector(onSetClassTime:)]) {
-            [weakself onSetClassTime:timerString];
-        }
-    };
-
-    self.userVM = [[AgoraUserVM alloc] initWithConfig:self.vmConfig];
-    self.chatVM = [[AgoraChatVM alloc] initWithConfig:self.vmConfig];
-
-    AgoraEduManager.shareManager.eduManager.delegate = self;
-    AgoraEduManager.shareManager.roomManager.delegate = self;
-    
-    __weak AgoraBaseViewController *weakSelf = self;
-    
-    [self.roomVM joinClassroomWithSuccessBlock:^(AgoraRTELocalUser *localUser) {
-        
         // apaas的小班课是4， 上报rtc也是4
         NSInteger appScenario = weakself.vmConfig.sceneType;
         // 0代表aPaaS， 1代表PaaS
@@ -174,9 +150,13 @@
         AgoraReportor *report = [ApaasReporterWrapper getApaasReportor];
         AgoraReportorContextV2 *context = report.contextV2;
         context.streamUuid = localUser.streamUuid;
-        context.streamSessionId = [[AgoraRTCManager shareManager] getCallId];
+        context.streamSessionId = [[AgoraRTCManager shareManager] getCallIdWithChannelId:self.vmConfig.roomUuid];
+        context.rtmSid = [[AgoraRTMManager shareManager] getSessionId];
+        context.roomCreatTs = timestamp;
         [report setV2WithContext:context];
        
+        NSLog(@"context.streamSessionId: %@", context.streamSessionId);
+        
         [ApaasReporterWrapper localUserJoin];
         
         [manager getClassroomInfoWithSuccess:^(AgoraRTEClassroom * _Nonnull room) {
@@ -207,9 +187,41 @@
         } failureBlock:^(AgoraEduContextError *error) {
             [weakself onShowErrorInfo:error];
         }];
+        
+        [weakself.eventDispatcher onJoinedClassroom];
     } failureBlock:^(AgoraEduContextError *error) {
         [weakself onShowErrorInfo:error];
     }];
+}
+
+#pragma mark - Private Data
+- (void)initData {
+    AgoraWEAK(self);
+
+    self.keyGroup.agoraAppId = self.vmConfig.appId;
+    self.keyGroup.localUserUuid = self.vmConfig.userUuid;
+    self.keyGroup.rtmToken = self.vmConfig.token;
+
+    self.roomVM = [[AgoraRoomVM alloc] initWithConfig:self.vmConfig];
+    self.roomVM.classOverBlock = ^{
+        [weakself updateClassState];
+    };
+    self.roomVM.timerToastBlock = ^(NSString *message) {
+        if ([weakself respondsToSelector:@selector(onShowClassTips:)]) {
+            [weakself onShowClassTips:message];
+        }
+    };
+    self.roomVM.updateTimerBlock = ^(NSString *timerString) {
+        if ([weakself respondsToSelector:@selector(onSetClassTime:)]) {
+            [weakself onSetClassTime:timerString];
+        }
+    };
+
+    self.userVM = [[AgoraUserVM alloc] initWithConfig:self.vmConfig];
+    self.chatVM = [[AgoraChatVM alloc] initWithConfig:self.vmConfig];
+
+    AgoraEduManager.shareManager.eduManager.delegate = self;
+    AgoraEduManager.shareManager.roomManager.delegate = self;
 }
 
 - (void)initChildren {
@@ -226,6 +238,9 @@
     
     id<AgoraController> device = [self createDeviceController];
     [self addChildWithChild:device];
+    
+    id<AgoraController> media = [self createMediaController];
+    [self addChildWithChild:media];
 }
 
 #pragma mark - AgoraRootController
@@ -300,6 +315,12 @@
 - (id<AgoraController>)createScreenShareController {
     self.screenShareController = [[AgoraScreenShareController alloc] initWithVmConfig:self.vmConfig];
     return self.screenShareController;
+}
+
+#pragma mark - AgoraMediaController
+- (id<AgoraController>)createMediaController {
+    self.mediaController = [[AgoraMediaController alloc] initWithVmConfig:self.vmConfig];
+    return self.mediaController;
 }
 
 #pragma mark - AgoraDeviceController
@@ -472,6 +493,10 @@ connectionStateChanged:(AgoraRTEConnectionState)state {
 
     if ([self respondsToSelector:@selector(onSetConnectionState:)]) {
         [self onSetConnectionState:[self.roomVM getConnectionState:state]];
+    }
+    
+    if (state == AgoraRTEConnectionStateReconnecting) {
+        [ApaasReporterWrapper localUserReconnect];
     }
 }
 

@@ -93,7 +93,7 @@ static AgoraClassroomSDK *manager = nil;
 
     if (config.roomType != AgoraEduRoomType1V1 &&
         config.roomType != AgoraEduRoomTypeSmall &&
-        config.roleType != AgoraEduRoomTypeLecture) {
+        config.roomType != AgoraEduRoomTypeLecture) {
         NSString *msg = [NSString stringWithFormat:@"%@%@", @"roomType", AgoraLocalizedString(@"ParamErrorText", nil)];
         [AgoraClassroomSDK showToast:msg];
         [AgoraClassroomSDK launchCompleteEvent:AgoraEduEventFailed];
@@ -131,7 +131,7 @@ static AgoraClassroomSDK *manager = nil;
     [AgoraHTTPManager getConfig:roomConfig
                         success:^(AgoraConfigModel * _Nonnull model) {
         // TODO: switch to release url
-        NSString *hostV2 = @"https://rest-argus-ad.agoralab.co";
+        NSString *hostV2 = @"https://rest-argus-ad.agoralab.co/v2/report";
         
         AgoraReportorContextV2 *contextV2 = [[AgoraReportorContextV2 alloc] initWithSource:@"apaas"
                                                                                       host:hostV2
@@ -140,10 +140,12 @@ static AgoraClassroomSDK *manager = nil;
                                                                                   scenario:@"education"
                                                                                   userUuid:config.userUuid
                                                                                   userName:config.userName
-                                                                                  userRole:@"studen"
+                                                                                  userRole:@"student"
                                                                                 streamUuid:@""
                                                                            streamSessionId:@""
-                                                                                  roomUuid:config.roomUuid];
+                                                                                  roomUuid:config.roomUuid
+                                                                                    rtmSid:@""
+                                                                               roomCreatTs:0];
         
         [[ApaasReporterWrapper getApaasReportor] setV2WithContext:contextV2];
         
@@ -253,7 +255,7 @@ static AgoraClassroomSDK *manager = nil;
         NSString *subEvent = @"http-preflight";
         NSString *httpApi = @"preflight";
         [ApaasReporterWrapper startJoinRoomSubEventWithSubEvent:subEvent];
-
+        
         [AgoraEduManager.shareManager queryRoomStateWithConfig:roomStateConfig
                                                        success:^{
             // Report

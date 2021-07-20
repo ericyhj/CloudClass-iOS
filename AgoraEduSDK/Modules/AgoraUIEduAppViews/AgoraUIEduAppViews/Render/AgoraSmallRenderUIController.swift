@@ -14,7 +14,8 @@ protocol AgoraSmallRenderUIControllerDelegate: NSObjectProtocol {
                          didUpdateCoHosts coHosts: [AgoraEduContextUserDetailInfo])
 }
 
-class AgoraSmallRenderUIController: AgoraRenderUIController {
+class AgoraSmallRenderUIController: AgoraRenderUIController,
+                                    AgoraUIUserViewDelegate {
     private(set) var teacherViewSize: CGSize = CGSize.zero
     private(set) var renderListViewHeight: CGFloat = 0
     
@@ -59,6 +60,55 @@ class AgoraSmallRenderUIController: AgoraRenderUIController {
         observeEvent(register: eventRegister)
         observeUI()
     }
+    
+    // MARK: - AgoraUIUserViewDelegate
+    func userView(_ userView: AgoraUIUserView,
+                  didPressAudioButton button: AgoraBaseUIButton,
+                  indexOfUserList index: Int) {
+        switch index {
+        case teacherIndex:
+            guard let info = teacherInfo,
+                  info.isSelf else {
+                return
+            }
+            
+            button.isSelected.toggle()
+            let isMuted = button.isSelected
+            userContext?.muteAudio(isMuted)
+        default:
+            let studentInfo = coHosts[index].userInfo
+            guard studentInfo.isSelf else {
+                return
+            }
+
+            button.isSelected.toggle()
+            let isMuted = button.isSelected
+            userContext?.muteAudio(isMuted)
+        }
+    }
+
+    func userView(_ userView: AgoraUIUserView,
+                  didPressVideoButton button: AgoraBaseUIButton,
+                  indexOfUserList index: Int) {
+        switch index {
+        case teacherIndex:
+            guard let info = teacherInfo,
+                  info.isSelf else {
+                return
+            }
+            
+            button.isSelected.toggle()
+            userContext?.muteVideo(button.isSelected)
+        default:
+            let studentInfo = coHosts[index].userInfo
+            guard studentInfo.isSelf else {
+                return
+            }
+
+            button.isSelected.toggle()
+            userContext?.muteVideo(button.isSelected)
+        }
+    }
 }
 
 // MARK: - Private
@@ -70,7 +120,7 @@ private extension AgoraSmallRenderUIController {
         containerView.addSubview(teacherView)
         containerView.addSubview(renderListView)
         
-        renderListView.isHidden = true
+        renderListView.alpha = 0
     }
 
     func initLayout() {

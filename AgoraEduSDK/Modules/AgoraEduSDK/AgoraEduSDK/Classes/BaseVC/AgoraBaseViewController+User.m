@@ -60,6 +60,7 @@
 
 - (void)muteVideo:(BOOL)mute {
     AgoraWEAK(self);
+    
     [self.userVM updateLocalVideoStream:mute
                            successBlock:^(AgoraRTEStream *stream) {
 
@@ -110,7 +111,6 @@
         [weakself onShowErrorInfo:error];
     }];
 }
-
 - (void)registerEventHandler:(id<AgoraEduUserHandler>)handler {
     [self.eventDispatcher registerWithObject:handler eventType:AgoraUIEventTypeUser];
 }

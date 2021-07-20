@@ -639,9 +639,9 @@ private extension LoginViewController{
                                           userProperties: ["myName":"Letty"])
         
         if alertView == nil {
-            alertView = AgoraUtils.showLoading(message: "")
-        } else {
-            alertView?.show(in: self.view)
+            alertView = AgoraUtils.showLoading(message: "",
+                                               inView: self.view,
+                                               shared: false)
         }
         
         AgoraClassroomSDK.launch(config,

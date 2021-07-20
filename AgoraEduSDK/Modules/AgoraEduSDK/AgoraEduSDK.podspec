@@ -61,7 +61,6 @@ TODO: Add long description of the pod here.
   s.dependency "AgoraWhiteBoard"
   s.dependency "AgoraActionProcess"
   s.dependency "AgoraReport"
-
   s.dependency "AgoraActionProcess"
   s.dependency "AgoraUIEduAppViews"
   s.dependency "AgoraUIEduBaseViews"

@@ -59,6 +59,8 @@ public class AgoraLocationAssistant: NSObject {
     static let object = AgoraLocationAssistant()
     
     private var dispatchWork: DispatchWorkItem?
+    
+    fileprivate lazy var loadingView: AgoraAlertView = AgoraAlertView(frame: .zero)
 
     fileprivate lazy var toastView: AgoraCourseTipsView? = {
         
@@ -99,28 +101,47 @@ public class AgoraLocationAssistant: NSObject {
     @discardableResult public static func showToast(message: String) -> AgoraBaseUIView? {
         return AgoraShowToast(message)
     }
-    @discardableResult public static func showLoading(message: String, inView: UIView? = nil) -> AgoraAlertView? {
-        
-        var view = inView
-        if view == nil {
-            view = UIApplication.shared.keyWindow
+    
+    @discardableResult public static func showLoading(message: String,
+                                                      inView: UIView? = nil,
+                                                      shared: Bool = true) -> AgoraAlertView? {
+        var view: AgoraAlertView?
+        if shared {
+            view = AgoraLocationAssistant.shared().loadingView
+            if view?.superview != nil {
+                return nil
+            }
+        } else {
+            view = AgoraAlertView(frame: .zero)
         }
-        guard let superView = view else {
+        
+        var superV = inView
+        if superV == nil {
+            superV = UIApplication.shared.keyWindow
+        }
+        guard let superView = superV,
+              let loadingView = view else {
             return nil
         }
-         
-        let alertView = AgoraAlertView(frame: .zero)
-
+        
         let messageLabel = AgoraAlertLabelModel()
         messageLabel.text = message
         
         let styleModel = AgoraAlertModel()
         styleModel.style = .GifLoading
         styleModel.messageLabel = messageLabel
-        alertView.styleModel = styleModel
-        alertView.show(in: superView)
+        
+        loadingView.styleModel = styleModel
+        loadingView.show(in: superView)
+        return loadingView
+    }
     
-        return alertView
+    public static func dismissLoading() {
+        let alertView = AgoraLocationAssistant.shared().loadingView
+        guard alertView.superview != nil else {
+            return
+        }
+        AgoraLocationAssistant.shared().loadingView.removeFromSuperview()
     }
     
     @discardableResult public static func showAlert(imageModel:AgoraAlertImageModel?,

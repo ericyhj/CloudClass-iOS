@@ -199,3 +199,7 @@ import Foundation
     }
 }
 
+/// 媒体类型
+@objc public enum EduContextMediaStreamType : Int {
+    case audio, video, all
+}

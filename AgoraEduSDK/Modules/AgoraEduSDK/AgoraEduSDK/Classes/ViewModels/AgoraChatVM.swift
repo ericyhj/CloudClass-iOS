@@ -144,7 +144,7 @@ extension AgoraChatVM {
         if mode == .room {
             AgoraHTTPManager.roomChat(withConfig: chatConfig) {[weak self] (model) in
                 kitChatInfo.sendState = .success
-                self?.msgsIdMapping["\(model.messageId)"] = kitChatInfo.id
+                self?.msgsIdMapping["\(model.data.messageId)"] = kitChatInfo.id
                 successBlock(kitChatInfo)
             } failure: {[weak self] (error, code) in
                 if let `self` = self {
@@ -155,7 +155,7 @@ extension AgoraChatVM {
         } else {
             AgoraHTTPManager.conversationChat(withConfig: chatConfig) {[weak self] (model) in
                 kitChatInfo.sendState = .success
-                self?.msgsIdMapping[model.peerMessageId] = kitChatInfo.id
+                self?.msgsIdMapping[model.data.peerMessageId] = kitChatInfo.id
                 successBlock(kitChatInfo)
             } failure: {[weak self] (error, code) in
                 if let `self` = self {
@@ -240,8 +240,7 @@ extension AgoraChatVM {
                     self.conversationInfos.insert(contentsOf: kitChatInfos.reversed(), at: 0)
                 }
                 
-                
-                successBlock(kitChatInfos)
+                successBlock(kitChatInfos.reversed())
             } else {
 //                failureBlock("network error")
             }
