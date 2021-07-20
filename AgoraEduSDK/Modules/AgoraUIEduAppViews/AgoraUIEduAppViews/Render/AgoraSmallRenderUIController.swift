@@ -14,8 +14,7 @@ protocol AgoraSmallRenderUIControllerDelegate: NSObjectProtocol {
                          didUpdateCoHosts coHosts: [AgoraEduContextUserDetailInfo])
 }
 
-class AgoraSmallRenderUIController: AgoraRenderUIController,
-                                    AgoraUIUserViewDelegate {
+class AgoraSmallRenderUIController: AgoraRenderUIController {
     private(set) var teacherViewSize: CGSize = CGSize.zero
     private(set) var renderListViewHeight: CGFloat = 0
     
@@ -59,55 +58,6 @@ class AgoraSmallRenderUIController: AgoraRenderUIController,
         initLayout()
         observeEvent(register: eventRegister)
         observeUI()
-    }
-    
-    // MARK: - AgoraUIUserViewDelegate
-    func userView(_ userView: AgoraUIUserView,
-                  didPressAudioButton button: AgoraBaseUIButton,
-                  indexOfUserList index: Int) {
-        switch index {
-        case teacherIndex:
-            guard let info = teacherInfo,
-                  info.isSelf else {
-                return
-            }
-            
-            button.isSelected.toggle()
-            let isMuted = button.isSelected
-            userContext?.muteAudio(isMuted)
-        default:
-            let studentInfo = coHosts[index].userInfo
-            guard studentInfo.isSelf else {
-                return
-            }
-
-            button.isSelected.toggle()
-            let isMuted = button.isSelected
-            userContext?.muteAudio(isMuted)
-        }
-    }
-
-    func userView(_ userView: AgoraUIUserView,
-                  didPressVideoButton button: AgoraBaseUIButton,
-                  indexOfUserList index: Int) {
-        switch index {
-        case teacherIndex:
-            guard let info = teacherInfo,
-                  info.isSelf else {
-                return
-            }
-            
-            button.isSelected.toggle()
-            userContext?.muteVideo(button.isSelected)
-        default:
-            let studentInfo = coHosts[index].userInfo
-            guard studentInfo.isSelf else {
-                return
-            }
-
-            button.isSelected.toggle()
-            userContext?.muteVideo(button.isSelected)
-        }
     }
 }
 

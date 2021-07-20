@@ -60,7 +60,7 @@ public class AgoraLocationAssistant: NSObject {
     
     private var dispatchWork: DispatchWorkItem?
     
-    fileprivate lazy var loadingView: AgoraAlertView = AgoraAlertView(frame: .zero)
+    fileprivate lazy var loadingView = AgoraAlertView(frame: .zero)
 
     fileprivate lazy var toastView: AgoraCourseTipsView? = {
         

@@ -33,9 +33,6 @@ public var isDebug = false
     var privateChat: AgoraPrivateChatController?
     var userList: AgoraUserListUIController?
     
-    // lecture
-    var renderLecture: AgoraLectureRenderUIController?
-    
     // variable
     var isFullScreen = false
     var coHostCount = 0
@@ -93,28 +90,12 @@ public var isDebug = false
             self.render1V1 = Agora1V1RenderUIController(viewType: viewType,
                                                         contextProvider: self,
                                                         eventRegister: self)
-        case .small:
+        case .small: fallthrough
+        case .lecture:
             self.renderSmall = AgoraSmallRenderUIController(viewType: viewType,
                                                             contextProvider: self,
                                                             eventRegister: self,
                                                             delegate: self)
-            
-            self.handsUp = AgoraHandsUpUIController(viewType: viewType,
-                                                    contextProvider: self,
-                                                    eventRegister: self)
-            
-            self.privateChat = AgoraPrivateChatController(viewType: viewType,
-                                                          contextProvider: self,
-                                                          eventRegister: self)
-            
-            self.userList = AgoraUserListUIController(viewType: viewType,
-                                                      contextProvider: self,
-                                                      eventRegister: self)
-        case .lecture:
-            self.renderLecture = AgoraLectureRenderUIController(viewType: viewType,
-                                                                contextProvider: self,
-                                                                eventRegister: self,
-                                                                delegate: self)
             
             self.handsUp = AgoraHandsUpUIController(viewType: viewType,
                                                     contextProvider: self,

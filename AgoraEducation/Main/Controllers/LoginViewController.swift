@@ -638,6 +638,10 @@ private extension LoginViewController{
                                           boardRegion: region,
                                           userProperties: ["myName":"Letty"])
         
+        let encodeConfig = AgoraEduVideoEncoderConfiguration()
+//        encodeConfig.bitrate = 0
+        config.cameraEncoderConfiguration = encodeConfig
+        
         if alertView == nil {
             alertView = AgoraUtils.showLoading(message: "",
                                                inView: self.view,

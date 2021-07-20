@@ -22,7 +22,6 @@ class AgoraRoomUIController: NSObject, AgoraUIController {
     }
     
     private let navigationBar = AgoraUINavigationBar(frame: .zero)
-    private var loadingView: AgoraAlertView?
     
     private weak var contextProvider: AgoraControllerContextProvider?
     private weak var eventRegister: AgoraControllerEventRegister?

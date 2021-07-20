@@ -240,6 +240,7 @@ extension AgoraChatVM {
                     self.conversationInfos.insert(contentsOf: kitChatInfos.reversed(), at: 0)
                 }
                 
+                
                 successBlock(kitChatInfos.reversed())
             } else {
 //                failureBlock("network error")

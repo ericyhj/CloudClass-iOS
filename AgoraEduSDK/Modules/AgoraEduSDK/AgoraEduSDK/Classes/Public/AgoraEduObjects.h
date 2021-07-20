@@ -45,6 +45,19 @@ NS_ASSUME_NONNULL_BEGIN
                          resourceUrl:(NSString *)resourceUrl;
 @end
 
+
+@interface AgoraEduVideoEncoderConfiguration : NSObject
+@property (nonatomic, assign) NSInteger width;
+@property (nonatomic, assign) NSInteger height;
+@property (nonatomic, assign) NSInteger frameRate;
+@property (nonatomic, assign) NSInteger bitrate;
+
+- (instancetype)initWithWidth:(NSInteger)width
+                       height:(NSInteger)height
+                    frameRate:(NSInteger)frameRate
+                      bitrate:(NSInteger)bitrate;
+@end
+
 /**启动课堂配置*/
 @interface AgoraEduLaunchConfig : NSObject
 // 用户名
@@ -70,6 +83,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *boardRegion;
 // 用户自定义属性
 @property (nonatomic, copy, nullable) NSDictionary<NSString *, NSString *> *userProperties;
+
+// 分辨率配置属性
+@property (nonatomic, strong, nullable) AgoraEduVideoEncoderConfiguration *cameraEncoderConfiguration;
 
 - (instancetype)initWithUserName:(NSString *)userName
                         userUuid:(NSString *)userUuid

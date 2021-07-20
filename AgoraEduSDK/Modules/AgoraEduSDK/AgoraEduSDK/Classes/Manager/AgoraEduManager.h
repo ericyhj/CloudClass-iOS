@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)initWithUserUuid:(NSString *)userUuid
                 userName:(NSString *)userName
                   roomId:(NSString *)roomId
+             videoConfig:(AgoraRTEVideoConfig * _Nullable)videoConfig
                      tag:(NSInteger)tag
                  success:(void (^) (void))successBlock
                  failure:(void (^) (NSError * _Nonnull error))failureBlock;

@@ -245,10 +245,21 @@ static AgoraClassroomSDK *manager = nil;
     if (config.userProperties) {
         roomStateConfig.userProperties = config.userProperties;
     }
+    
+    AgoraRTEVideoConfig *videoCondfig;
+    if (config.cameraEncoderConfiguration) {
+        videoCondfig = [AgoraRTEVideoConfig defaultVideoConfig];
+        videoCondfig.videoDimensionWidth = config.cameraEncoderConfiguration.width;
+        videoCondfig.videoDimensionHeight = config.cameraEncoderConfiguration.height;
+        videoCondfig.frameRate = config.cameraEncoderConfiguration.frameRate;
+        videoCondfig.bitrate = config.cameraEncoderConfiguration.bitrate;
+    }
+    
 
     [AgoraEduManager.shareManager initWithUserUuid:userUuid
                                           userName:userName
                                             roomId:roomUuid
+                                       videoConfig:videoCondfig
                                                tag:sceneType
                                            success:^{
         // Report
