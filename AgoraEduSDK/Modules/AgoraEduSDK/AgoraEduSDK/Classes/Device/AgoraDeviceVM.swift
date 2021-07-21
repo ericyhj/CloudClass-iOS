@@ -65,7 +65,7 @@ import AgoraReport
                 let camera = device[AgoraDeviceType.camera.rawValue] as? Int ?? 1
                 let mic = device[AgoraDeviceType.microphone.rawValue] as? Int ?? 1
                 // 默认不开启麦克风
-                let speaker = device[AgoraDeviceType.speaker.rawValue] as? Int ?? 0
+                let speaker = device[AgoraDeviceType.speaker.rawValue] as? Int ?? 1
                 // 默认前置摄像头
                 let facing = device[AgoraDeviceType.facing.rawValue] as? Int ?? 0
 
