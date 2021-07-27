@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AgoraEduSDK'
-  s.version          = '1.1.2'
+  s.version          = '1.1.0'
   s.summary          = 'Agora Education SDK'
   s.description      = <<-DESC
   AgoraEduSDK includes the information management in the room, and also includes three educational scenarios: 'One to One', 'Small Classroom' and 'Lecture Hall'. You can quickly build an education app through the AgoraEduSDK.
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   
   s.static_framework = true
 
-  s.dependency "AgoraRtm_iOS", "1.4.1"
+  s.dependency "AgoraRtm_iOS", "1.4.7"
   s.dependency "AgoraRtcEngine_Special_iOS", "2.9.107.136"
   s.dependency "AFNetworking", "4.0.1"
   s.dependency "Whiteboard", "2.12.26"
