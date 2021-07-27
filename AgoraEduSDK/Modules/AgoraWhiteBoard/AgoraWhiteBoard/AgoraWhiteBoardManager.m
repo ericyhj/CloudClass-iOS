@@ -103,7 +103,6 @@ userInfo:@{NSLocalizedDescriptionKey:(reason)}])
             
             if (scene.ppt) {
                 [weakself.room scalePptToFit:WhiteAnimationModeContinuous];
-                [weakself.room scaleIframeToFit];
             }
             
             [weakself refreshViewSize];
@@ -173,7 +172,6 @@ userInfo:@{NSLocalizedDescriptionKey:(reason)}])
     WhiteScene *scene = scenes[sceneIndex];
     if (scene.ppt) {
         [self.room scalePptToFit:WhiteAnimationModeContinuous];
-        [self.room scaleIframeToFit];
     } else {
         WhiteCameraConfig *config = [WhiteCameraConfig new];
         config.scale = @(1);
@@ -394,7 +392,6 @@ The RoomState property in the room will trigger this callback when it changes.
     // 老师离开
     if (modifyState.broadcastState && modifyState.broadcastState.broadcasterId == nil) {
         [self.room scalePptToFit:WhiteAnimationModeContinuous];
-        [self.room scaleIframeToFit];
     }
     
     // 全局状态 WhiteGlobalState 修改时
@@ -416,8 +413,8 @@ The RoomState property in the room will trigger this callback when it changes.
             isEqualScenePath = YES;
         } else {
             // 不等于的时候 要判断前面的path是否一样
-            NSArray<NSString *> *boardPaths1 =  [self.boardScenePath componentsSeparatedByString:@"/"];
-            NSArray<NSString *> *boardPaths2 =  [sceneState.scenePath componentsSeparatedByString:@"/"];
+            NSArray<NSString *> *boardPaths1 = [self.boardScenePath componentsSeparatedByString:@"/"];
+            NSArray<NSString *> *boardPaths2 = [sceneState.scenePath componentsSeparatedByString:@"/"];
             if (boardPaths1.count >= 2 &&
                 boardPaths2.count >= 2) {
                 NSString *path1 = [NSString stringWithFormat:@"%@%@", boardPaths1[0], boardPaths1[1]];
@@ -444,7 +441,6 @@ The RoomState property in the room will trigger this callback when it changes.
         
         if (scene.ppt) {
             [self.room scalePptToFit:WhiteAnimationModeContinuous];
-            [self.room scaleIframeToFit];
         }
         
         if ([self.delegate respondsToSelector:@selector(onWhiteBoardPageChanged:pageCount:)]) {
@@ -458,6 +454,14 @@ The RoomState property in the room will trigger this callback when it changes.
     if ([self.delegate respondsToSelector:@selector(onWhiteBoardError:)]) {
         NSError *err = AgoraBoardLocalError(AgoraBoardLocalErrorCode, error);
         [self.delegate onWhiteBoardError: err];
+    }
+}
+
+- (void)firePhaseChanged:(WhiteRoomPhase)phase {
+    if (phase == WhiteRoomPhaseDisconnected && !self.room.disconnectedBySelf) {
+        if ([self.delegate respondsToSelector:@selector(onWhiteBoardDisConnectedUnexpected)]) {
+            [self.delegate onWhiteBoardDisConnectedUnexpected];
+        }
     }
 }
 

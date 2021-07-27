@@ -22,10 +22,10 @@ import AgoraEduSDK.AgoraEduSDKFiles
     private var hasStop: Bool = false
     private var timer: DispatchSourceTimer?
 
-    public func joinClassroom(successBlock: @escaping (_ userInfo: AgoraRTELocalUser) -> Void,
+    public func joinClassroom(successBlock: @escaping (_ userInfo: AgoraRTELocalUser, _ timestamp: UInt64) -> Void,
                               failureBlock: @escaping (_ error: AgoraEduContextError) -> Void) {
         AgoraEduManager.share().joinClassroom(with: self.config.sceneType,
-                                              userName: self.config.userName) { [weak self] in
+                                              userName: self.config.userName) { [weak self] (timestamp) in
             guard let `self` = self else {
                 return
             }
@@ -33,7 +33,7 @@ import AgoraEduSDK.AgoraEduSDKFiles
             self.hasSignalReconnect = false
             let roomManager = AgoraEduManager.share().roomManager
             roomManager?.getLocalUser(success: { [weak self] (userInfo) in
-                successBlock(userInfo)
+                successBlock(userInfo, timestamp)
                 self?.startTimer()
                 self?.updateTime()
             }, failure: { [weak self] (error) in

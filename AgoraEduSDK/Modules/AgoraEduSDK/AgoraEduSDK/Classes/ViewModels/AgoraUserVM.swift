@@ -825,6 +825,7 @@ extension AgoraUserVM {
     
     fileprivate func updateLocalStream(_ muteAudio: Bool?,
                                        muteVideo: Bool?,
+                                       enablePublish: Bool = true,
                                        successBlock: @escaping (_ stream: AgoraRTEStream) -> Void,
                                        failureBlock: @escaping (_ error: Error) -> Void) {
         AgoraEduManager.share().roomManager?.getLocalUser(success: {[weak self] (localUser) in
@@ -846,14 +847,17 @@ extension AgoraUserVM {
             config.enableMicrophone = hasAudio
             AgoraEduManager.share().studentService?.startOrUpdateLocalStream(config, success: { (stream) in
                 
-                AgoraEduManager.share().studentService?.publishStream(stream, success: {
-                    
+                if enablePublish {
+                    AgoraEduManager.share().studentService?.publishStream(stream, success: {
+                        
+                        successBlock(stream)
+                        
+                    }, failure: { (error) in
+                        failureBlock(error)
+                    })
+                } else {
                     successBlock(stream)
-                    
-                }, failure: { (error) in
-                    failureBlock(error)
-                })
-                
+                }
             }, failure: { (error) in
                 failureBlock(error)
             })

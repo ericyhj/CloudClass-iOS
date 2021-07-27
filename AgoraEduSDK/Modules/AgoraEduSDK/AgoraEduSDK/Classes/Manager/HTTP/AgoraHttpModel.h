@@ -35,10 +35,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) AgoraRoomStateInfoModel *data;
 @end
 
-@interface AgoraChatModel : AgoraBaseModel
+@interface AgoraChatInfoModel : AgoraBaseModel
 @property (nonatomic, assign) NSInteger messageId;
 @property (nonatomic, strong) NSString *peerMessageId;
 @property (nonatomic, strong) NSArray<NSString *> *sensitiveWords;
+@end
+@interface AgoraChatModel : AgoraBaseModel
+@property (nonatomic, strong) AgoraChatInfoModel *data;
 @end
 
 @interface AgoraBoardConfigInfoModel : NSObject

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol AgoraWhiteManagerDelegate <NSObject>
 - (void)onWhiteBoardStateChanged:(AgoraWhiteBoardStateModel *)state;
+- (void)onWhiteBoardDisConnectedUnexpected;
 
 @optional
 - (void)onWhiteBoardError:(NSError *)error;

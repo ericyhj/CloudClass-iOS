@@ -23,6 +23,8 @@ protocol AgoraBoardVMDelegate: NSObjectProtocol {
     func didBoardPageChange(pageIndex: Int, pageCount: Int)
     func didSceneChange(urls: [URL])
     func didScenePathChanged(path: String)
+    
+    func didBoardDisConnectedUnexpected()
 }
 
 public class AgoraBoardVM: AgoraBaseVM {
@@ -277,6 +279,10 @@ extension AgoraBoardVM: AgoraWhiteManagerDelegate {
         
         delegate?.didBoardPageChange(pageIndex: pageIndex,
                                      pageCount: pageCount)
+    }
+    
+    public func onWhiteBoardDisConnectedUnexpected() {
+        delegate?.didBoardDisConnectedUnexpected()
     }
 
     // 老师切换场景，根据课件

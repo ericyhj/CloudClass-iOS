@@ -105,18 +105,23 @@ extension AgoraBoardController {
 }
 
 extension AgoraBoardController {
-    func join() {
-        eventDispatcher.onSetLoadingVisible(true)
+    func join(_ showLoading: Bool = true) {
+        if showLoading {
+            eventDispatcher.onSetLoadingVisible(true)
+        }
         
         boardVM.join(boardId: boardId,
-                     boardToken: boardToken) { [unowned self] in
-            self.eventDispatcher.onSetLoadingVisible(false)
+                     boardToken: boardToken) { [weak self] in
+            if showLoading {
+                self?.eventDispatcher.onSetLoadingVisible(false)
+            }
         } failure: { [weak self] (error) in
             guard let `self` = self else {
-                return
+               return
             }
-
-            self.eventDispatcher.onSetLoadingVisible(false)
+            if showLoading {
+                self.eventDispatcher.onSetLoadingVisible(false)
+            }
             self.delegate?.boardController(self,
                                            didOccurError: error)
         }
@@ -220,6 +225,10 @@ extension AgoraBoardController: AgoraEduWhiteBoardPageControlContext {
 
 // MARK: - AgoraBoardVMDelegate
 extension AgoraBoardController: AgoraBoardVMDelegate {
+    func didBoardDisConnectedUnexpected() {
+        join(false)
+    }
+    
     func didBoardFullScreenMode(_ fullScreen: Bool) {
         eventDispatcher.onSetResizeFullScreenEnable(!fullScreen)
         eventDispatcher.onSetFullScreen(fullScreen)
