@@ -140,7 +140,7 @@ class AgoraWhiteBoardUIController: NSObject, AgoraUIController, AgoraUIControlle
         boardPageControl.agora_x = 10
         boardPageControl.agora_bottom = 10
         boardPageControl.agora_height = 40
-        boardPageControl.agora_width = 260
+        boardPageControl.agora_width = 200
         boardPageControl.setupShadow(cornerRadius: 20)
     }
     

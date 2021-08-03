@@ -277,15 +277,18 @@ fileprivate extension AgoraBoardPageControlView {
         fullScreenAloneButton.agora_width = 53
         fullScreenAloneButton.agora_height = 53
         
-        decreaseButton.agora_x = fullScreenButton.agora_x + buttonWidth + subViewInterSpace
+        decreaseButton.agora_x = fullScreenButton.agora_x
         decreaseButton.agora_y = buttonY
-        decreaseButton.agora_width = buttonWidth
+        decreaseButton.agora_width = 0
         decreaseButton.agora_height = buttonHeight
         
-        increaseButton.agora_x = decreaseButton.agora_x + buttonWidth + subViewInterSpace
+        increaseButton.agora_x = decreaseButton.agora_x
         increaseButton.agora_y = buttonY
-        increaseButton.agora_width = buttonWidth
+        increaseButton.agora_width = 0
         increaseButton.agora_height = buttonHeight
+        
+        decreaseButton.isHidden = true
+        increaseButton.isHidden = true
         
         speratorLine.agora_x = increaseButton.agora_x + buttonWidth + subViewInterSpace
         speratorLine.agora_y = 12

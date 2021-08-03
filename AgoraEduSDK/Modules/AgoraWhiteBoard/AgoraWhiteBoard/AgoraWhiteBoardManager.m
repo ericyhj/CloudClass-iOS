@@ -150,12 +150,14 @@ userInfo:@{NSLocalizedDescriptionKey:(reason)}])
 }
 
 - (void)setFollowMode:(BOOL)follow{
-    if (follow) {
-        [self.room setViewMode:WhiteViewModeFollower];
-    } else {
-        [self.room setViewMode:WhiteViewModeFreedom];
-    }
-    
+//    if (follow) {
+//        [self.room setViewMode:WhiteViewModeFollower];
+//    } else {
+//        [self.room setViewMode:WhiteViewModeFreedom];
+//    }
+  
+    // 学生只有follower模式
+    [self.room setViewMode:WhiteViewModeFollower];
 }
 
 // when board view size changed, must call refreshViewSize
@@ -195,7 +197,10 @@ userInfo:@{NSLocalizedDescriptionKey:(reason)}])
 
 // lock view
 - (void)lockViewTransform:(BOOL)lock {
-    [self.room disableCameraTransform:lock];
+//    [self.room disableCameraTransform:lock];
+    
+    // 禁止手势
+    [self.room disableCameraTransform:YES];
 }
 
 // leave
@@ -286,7 +291,6 @@ userInfo:@{NSLocalizedDescriptionKey:(reason)}])
 }
 
 - (void)setWhiteMemberState {
-    NSLog(@"currentApplianceName: %@", self.whiteMemberState.currentApplianceName);
     [self.room setMemberState:self.whiteMemberState];
 }
 
@@ -303,22 +307,24 @@ userInfo:@{NSLocalizedDescriptionKey:(reason)}])
 }
 
 - (void)increaseScale {
-    __weak AgoraWhiteBoardManager *weakself = self;
-    [self.room getZoomScaleWithResult:^(CGFloat scale) {
-        WhiteCameraConfig *config = [WhiteCameraConfig new];
-        config.scale = @(scale + 0.1);
-        [weakself.room moveCamera:config];
-    }];
+    // 学生不能缩放视图，保证follower
+//    __weak AgoraWhiteBoardManager *weakself = self;
+//    [self.room getZoomScaleWithResult:^(CGFloat scale) {
+//        WhiteCameraConfig *config = [WhiteCameraConfig new];
+//        config.scale = @(scale + 0.1);
+//        [weakself.room moveCamera:config];
+//    }];
 }
 
 - (void)decreaseScale {
-    __weak AgoraWhiteBoardManager *weakself = self;
-    [self.room getZoomScaleWithResult:^(CGFloat scale) {
-        WhiteCameraConfig *config = [WhiteCameraConfig new];
-        CGFloat ss = scale - 0.1;
-        config.scale = @(ss < 0.1 ? 0.1 : ss);
-        [weakself.room moveCamera:config];
-    }];
+    // 学生不能缩放视图，保证follower
+//    __weak AgoraWhiteBoardManager *weakself = self;
+//    [self.room getZoomScaleWithResult:^(CGFloat scale) {
+//        WhiteCameraConfig *config = [WhiteCameraConfig new];
+//        CGFloat ss = scale - 0.1;
+//        config.scale = @(ss < 0.1 ? 0.1 : ss);
+//        [weakself.room moveCamera:config];
+//    }];
 }
 
 #pragma mark - Private
@@ -431,6 +437,13 @@ The RoomState property in the room will trigger this callback when it changes.
                 [self.delegate onWhiteBoardSceneChanged:self.boardScenePath];
             }
         }
+        
+        NSArray<WhiteScene *> *scenes = sceneState.scenes;
+        NSInteger sceneIndex = sceneState.index;
+        WhiteScene *scene = scenes[sceneIndex];
+        if (scene.ppt) {
+            [self.room scalePptToFit:WhiteAnimationModeContinuous];
+        }
     }
     
     // 场景状态 WhiteSceneState 修改时
@@ -438,10 +451,6 @@ The RoomState property in the room will trigger this callback when it changes.
         NSArray<WhiteScene *> *scenes = sceneState.scenes;
         NSInteger sceneIndex = sceneState.index;
         WhiteScene *scene = scenes[sceneIndex];
-        
-        if (scene.ppt) {
-            [self.room scalePptToFit:WhiteAnimationModeContinuous];
-        }
         
         if ([self.delegate respondsToSelector:@selector(onWhiteBoardPageChanged:pageCount:)]) {
             [self.delegate onWhiteBoardPageChanged:sceneIndex
