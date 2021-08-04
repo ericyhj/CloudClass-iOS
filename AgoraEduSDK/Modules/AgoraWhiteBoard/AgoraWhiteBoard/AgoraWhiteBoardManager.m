@@ -101,9 +101,10 @@ userInfo:@{NSLocalizedDescriptionKey:(reason)}])
             NSInteger sceneIndex = sceneState.index;
             WhiteScene *scene = scenes[sceneIndex];
             
-//            if (scene.ppt) {
-//                [weakself.room scalePptToFit:WhiteAnimationModeContinuous];
-//            }
+            if (scene.ppt) {
+                [weakself setFreedomMode];
+                [weakself.room scalePptToFit:WhiteAnimationModeContinuous];
+            }
             
             [weakself refreshViewSize];
             
@@ -157,9 +158,16 @@ userInfo:@{NSLocalizedDescriptionKey:(reason)}])
 //    }
   
     // 学生只有follower模式
-    [self.room setViewMode:WhiteViewModeFollower];
+    [self setFollowerMode];
 }
 
+- (void)setFollowerMode {
+    [self.room setViewMode:WhiteViewModeFollower];
+}
+- (void)setFreedomMode {
+    [self.room setViewMode:WhiteViewModeFreedom];
+}
+    
 // when board view size changed, must call refreshViewSize
 // 当 WhiteBoardView 的 super view 的 frame 变化时，需要调用这个方法
 - (void)refreshViewSize {
@@ -432,6 +440,15 @@ The RoomState property in the room will trigger this callback when it changes.
         }
 
         if (!isEqualScenePath) {
+            NSArray<WhiteScene *> *scenes = sceneState.scenes;
+            NSInteger sceneIndex = sceneState.index;
+            WhiteScene *scene = scenes[sceneIndex];
+            if(scene.ppt) {
+                [self setFreedomMode];
+            } else {
+                [self setFollowerMode];
+            }
+            
             self.boardScenePath = sceneState.scenePath;
             if ([self.delegate respondsToSelector:@selector(onWhiteBoardSceneChanged:)]) {
                 [self.delegate onWhiteBoardSceneChanged:self.boardScenePath];
