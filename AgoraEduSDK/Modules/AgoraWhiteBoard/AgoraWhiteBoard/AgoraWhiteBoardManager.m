@@ -101,9 +101,9 @@ userInfo:@{NSLocalizedDescriptionKey:(reason)}])
             NSInteger sceneIndex = sceneState.index;
             WhiteScene *scene = scenes[sceneIndex];
             
-            if (scene.ppt) {
-                [weakself.room scalePptToFit:WhiteAnimationModeContinuous];
-            }
+//            if (scene.ppt) {
+//                [weakself.room scalePptToFit:WhiteAnimationModeContinuous];
+//            }
             
             [weakself refreshViewSize];
             
@@ -437,13 +437,6 @@ The RoomState property in the room will trigger this callback when it changes.
                 [self.delegate onWhiteBoardSceneChanged:self.boardScenePath];
             }
         }
-        
-        NSArray<WhiteScene *> *scenes = sceneState.scenes;
-        NSInteger sceneIndex = sceneState.index;
-        WhiteScene *scene = scenes[sceneIndex];
-        if (scene.ppt) {
-            [self.room scalePptToFit:WhiteAnimationModeContinuous];
-        }
     }
     
     // 场景状态 WhiteSceneState 修改时
@@ -451,6 +444,10 @@ The RoomState property in the room will trigger this callback when it changes.
         NSArray<WhiteScene *> *scenes = sceneState.scenes;
         NSInteger sceneIndex = sceneState.index;
         WhiteScene *scene = scenes[sceneIndex];
+        
+        if (scene.ppt) {
+            [self.room scalePptToFit:WhiteAnimationModeContinuous];
+        }
         
         if ([self.delegate respondsToSelector:@selector(onWhiteBoardPageChanged:pageCount:)]) {
             [self.delegate onWhiteBoardPageChanged:sceneIndex
